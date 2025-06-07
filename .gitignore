@@ -14,10 +14,12 @@
 /coverage
 
 # next.js
-/.next/
+# remove .next so i can build locally maybe ??
+/.next/ 
 /out/
 
 # production
+# DO I NEED TO REMOVE THIS TO ?
 /build
 
 # misc
@@ -39,3 +41,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Both under added based on chatGpt
+# ─── Turbo (Monorepos, CI optimization - Optional) ───────────
+/turbo            # Turbo cache dir, can skip on server
+.cache/           # If you use Turborepo caching
+
+# ─── VS Code (Optional) ──────────────────────────────────────
+# .vscode/
+# settings.json     
+# Only ignore if you're not sharing workspace settings
+# remove for laptop push then remove file and add this to gitignore on server

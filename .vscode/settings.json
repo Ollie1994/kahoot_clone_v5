@@ -1,0 +1,17 @@
+{
+    "files.watcherExclude": {
+      "**/.next/**": true,
+      "**/node_modules/**": true,
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/tmp/**": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/bower_components": true,
+      "**/.next": true
+    },
+    "typescript.tsserver.log": "off",
+    "typescript.disableAutomaticTypeAcquisition": true
+  }
+  
