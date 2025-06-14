@@ -1,3 +1,5 @@
+// fungerar som ett test för att påvisa att prisma fungerar 
+
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -5,7 +7,7 @@ const prisma = new PrismaClient();
 async function main() {
   const newUser = await prisma.users.create({
     data: {
-      username: "Tina",
+      username: "Glenn",
       password: "Password_1",
     },
   });
