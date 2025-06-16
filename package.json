@@ -1,9 +1,11 @@
 {
   "name": "kahoot_clone_v5",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:socket": "node server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
