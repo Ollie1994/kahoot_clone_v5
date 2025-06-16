@@ -14,7 +14,14 @@ app.prepare().then(() => {
   const io = new Server(httpServer);
   io.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
+
+    // test grejer ---------------------------
+    socket.on("ready", () => {
+      // Send message to everyone
+      io.emit("message", "Everyone gets this because client said ready!!!!");
+    });
   });
+
   httpServer.listen(port, () => {
     console.log(`Server running on http://${hostname}:${port}`);
   });
