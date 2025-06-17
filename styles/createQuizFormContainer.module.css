@@ -1,6 +1,7 @@
 .createQuizFormContainerContainer {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
   padding-left: 6rem;
   padding-right: 6rem;
   padding-top: 2rem;
