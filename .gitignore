@@ -52,3 +52,4 @@ next-env.d.ts
 settings.json     
 # Only ignore if you're not sharing workspace settings
 # remove for laptop push then remove file and add this to gitignore on server
+/generated/prisma
