@@ -1,4 +1,10 @@
+import CreateQuizFormContainer from "@/components/CreateQuizFormContainer";
+
 const CreateQuiz = () => {
-  return <>CreateQuizPage</>;
+  return (
+    <>
+      <CreateQuizFormContainer></CreateQuizFormContainer>
+    </>
+  );
 };
 export default CreateQuiz;
