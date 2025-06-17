@@ -15,7 +15,7 @@ app.prepare().then(() => {
   io.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
 
-    // test grejer ---------------------------
+    // ------------------- test grejer ---------------------------
     socket.on("ready", () => {
       // Send message to everyone
       io.emit("message", "Everyone gets this because client said ready!!!!");
