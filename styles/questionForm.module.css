@@ -1,0 +1,40 @@
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+.rowContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+.questionFormInput {
+  padding: 5px;
+  width: 20rem;
+  height: 7rem;
+  font-size: x-large;
+  border-style: solid;
+}
+.imageUrlFormInput {
+  padding: 5px;
+  width: 20rem;
+  height: 3rem;
+  font-size: x-large;
+  border-style: solid;
+}
+.answersGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+.answerFormInput {
+  border-style: solid;
+  height: 2rem;
+  width: 20rem;
+}
