@@ -24,7 +24,7 @@ const QuizFormTitle = () => {
       <div className={styles.rowContainer}>
         <div className={styles.columnContainer}>
           <label htmlFor="title">
-            <h1>Title:</h1>
+            <h2>Title:</h2>
           </label>
         </div>
         <div className={styles.columnContainer}>
