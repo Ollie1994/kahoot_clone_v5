@@ -33,6 +33,10 @@
   justify-content: center;
   gap: 10px;
 }
+.answersGroupRow {
+  display: flex;
+  gap: 30px
+}
 .answerFormInput {
   border-style: solid;
   height: 2rem;
