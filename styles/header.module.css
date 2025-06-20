@@ -1,5 +1,13 @@
 .headerContainer {
   background-color: black;
   color: white;
-  height: 10rem;
+  height: 5rem;
+}
+
+.linkContainer {
+  display: flex;
+  justify-content:flex-start;
+  gap: 3rem;
+  padding-left: 2rem;
+  padding-top: 1.5rem;
 }

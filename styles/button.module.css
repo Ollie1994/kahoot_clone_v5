@@ -1,0 +1,13 @@
+.buttonContainer {
+  background-color: white;
+  border-style: solid;
+  color: black;
+  padding: 1px;
+  cursor: pointer;
+}
+.buttonContainer:hover {
+  background-color: rgb(89, 255, 0);
+}
+.buttonContainer:focus {
+  background-color: rgb(89, 255, 0);
+}
