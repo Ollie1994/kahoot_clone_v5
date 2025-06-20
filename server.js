@@ -14,11 +14,19 @@ app.prepare().then(() => {
   const io = new Server(httpServer);
   io.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
-
+    socket.on("join-room", ({ room, username }) => {
+      socket.join(room);
+      console.log(`User ${username} joined room ${room}`);
+      socket.to(room).emit("user_joined", `${username} joined room ${room}`);
+    });
+    io.on("disconnect", () => {
+      console.log(`User disconnected: ${socket.id}`);
+    });
     // ------------------- test grejer ---------------------------
     socket.on("ready", () => {
       // Send message to everyone
       io.emit("message", "Everyone gets this because client said ready!!!!");
+      // --------------------------------------------------------
     });
   });
 
