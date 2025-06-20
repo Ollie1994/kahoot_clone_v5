@@ -17,16 +17,12 @@ const QuizFormTitle = () => {
       },
     ],
   }); */
+  console.log(`Quiz Title: ${title}`);
 
   return (
     <div className={styles.quizFormTitleContainer}>
       <h1 className={styles.createQuizFormTitle}>Create Quiz Form</h1>
       <div className={styles.rowContainer}>
-        <div className={styles.columnContainer}>
-          <label htmlFor="title">
-            <h2>Title:</h2>
-          </label>
-        </div>
         <div className={styles.columnContainer}>
           <input
             className={styles.titleFormInput}
@@ -35,7 +31,6 @@ const QuizFormTitle = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <div>{console.log(`Quiz Title: ${title}`)}</div>
         </div>
       </div>
     </div>
