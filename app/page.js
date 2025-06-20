@@ -19,5 +19,10 @@ export default function Home() {
       socket.off("message");
     };
   }, []);
-  return <h1>Hello, Oliwer!</h1>;
+  return<>
+  <h1>Hello, Oliwer!</h1>;
+ 
+  
+  
+  </> 
 }
