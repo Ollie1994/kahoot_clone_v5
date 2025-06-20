@@ -4,7 +4,7 @@ import Link from "next/link";
 const CreateAndStart = () => {
   return (
     <div className={styles.container}>
-      <Link href="/">
+      <Link href="/game">
         <Button>Create and Start Game</Button>
       </Link>
     </div>
