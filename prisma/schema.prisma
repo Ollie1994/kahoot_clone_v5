@@ -26,6 +26,7 @@ type answer {
 }
 
 type question {
+  id            Int
   question      String
   imageUrl      String? 
   answers       answer[]

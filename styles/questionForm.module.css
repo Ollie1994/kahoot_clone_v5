@@ -59,3 +59,33 @@
   display: flex;
   justify-content: center;
 }
+
+/*TITLE*/
+.quizFormTitleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.createQuizFormTitle {
+  display: flex;
+  justify-content: center;
+}
+.titleRowContainer {
+  display: flex;
+  gap: 1rem;
+}
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.titleFormInput {
+  width: 50rem;
+  height: 3rem;
+  font-size: x-large;
+}
+/*create and start*/ 
+.container {
+    display: flex;
+    justify-content: center;
+}

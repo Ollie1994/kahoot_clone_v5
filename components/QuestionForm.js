@@ -2,6 +2,9 @@
 import styles from "@/styles/questionForm.module.css";
 import { useState } from "react";
 import Button from "@/components/Button";
+import DividerLine from "./DividerLine";
+import Link from "next/link";
+import { createPost } from "../actions/quiz/actions";
 
 let nextId = 0;
 
@@ -13,7 +16,7 @@ const QuestionForm = () => {
   const [username, setUsername] = useState("");
   const [score, setScore] = useState(0);
   const [question, setQuestion] = useState("");
-  const [data, setData] = useState({ question: "", url: "", answers: [] });
+  const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [answerOne, setAnswerOne] = useState({ answer: "", isCorrect: false });
   const [answerTwo, setAnswerTwo] = useState({ answer: "", isCorrect: false });
@@ -41,6 +44,20 @@ const QuestionForm = () => {
       setAnswerFour({ answer: "", isCorrect: false });
     }, 1000);
   };
+
+  const createGame = () => {
+    const quiz = {
+      title: title,
+      code: "",
+      isLive: false,
+      createdAt: "",
+      players: [],
+      questions: questions,
+    };
+    console.log(JSON.stringify(quiz))
+    createPost(quiz)
+  };
+
   const handleAddQuestion = () => {
     const list = [];
     list.push(answerOne, answerTwo, answerThree, answerFour);
@@ -92,6 +109,21 @@ const QuestionForm = () => {
 
   return (
     <div className={styles.columnContainer}>
+      <div className={styles.quizFormTitleContainer}>
+        <h1 className={styles.createQuizFormTitle}>Create Quiz Form</h1>
+        <div className={styles.titleRowContainer}>
+          <div className={styles.columnContainer}>
+            <input
+              className={styles.titleFormInput}
+              type="text"
+              placeholder="Enter a title for your quiz"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+        </div>
+      </div>
+      <DividerLine></DividerLine>
       <div className={styles.rowContainer}>
         <h2 className={styles.title}>Create a question</h2>
       </div>
@@ -170,7 +202,14 @@ const QuestionForm = () => {
           <Button onClick={() => handleAddQuestion()}>Add Question</Button>
         </div>
       </div>
+      <DividerLine></DividerLine>
+      <div className={styles.container}>
+        <Link href="/game">
+          <Button onClick={() => createGame()}>Create and Start Game</Button>
+        </Link>
+      </div>
       <div>
+        {console.log(` \nQuiz Title: ${title} \n `)}
         {console.log(
           "Questions: \n_______________________\n" +
             JSON.stringify(questions[0]) +
@@ -178,7 +217,8 @@ const QuestionForm = () => {
             JSON.stringify(questions[1]) +
             "\n________________________________\n" +
             JSON.stringify(questions[2]) +
-            "\n________________________________"
+            "\n________________________________" +
+            "\n "
         )}
       </div>
     </div>
