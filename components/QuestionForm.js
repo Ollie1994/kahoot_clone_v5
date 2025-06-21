@@ -32,7 +32,6 @@ const QuestionForm = () => {
 
   // funcs
   const resetForm = () => {
-    //wait 10 sec and set back values
     setTimeout(() => {
       setQuestion("");
       setImageUrl("");
@@ -43,10 +42,8 @@ const QuestionForm = () => {
     }, 1000);
   };
   const handleAddQuestion = () => {
-    console.log(`In ?`);
     const list = [];
     list.push(answerOne, answerTwo, answerThree, answerFour);
-    console.log("inside add: " + JSON.stringify(list));
     setQuestions([
       ...questions,
       {
@@ -60,10 +57,6 @@ const QuestionForm = () => {
   };
 
   const handleClick = (e) => {
-    console.log(`Clicked by: ${e}`);
-    console.log(
-      `FIRST ------ \n1=${answerOne.isCorrect} \n2=${answerTwo.isCorrect} \n3=${answerThree.isCorrect}\n4=${answerFour.isCorrect} `
-    );
     switch (e) {
       case "one":
         console.log("1?");
@@ -94,11 +87,7 @@ const QuestionForm = () => {
         setAnswerFour({ ...answerFour, isCorrect: true });
         break;
       default:
-      // code block
     }
-    console.log(
-      `SECOND ------ \n1=${answerOne.isCorrect} \n2=${answerTwo.isCorrect} \n3=${answerThree.isCorrect}\n4=${answerFour.isCorrect} `
-    );
   };
 
   return (
@@ -181,30 +170,7 @@ const QuestionForm = () => {
           <Button onClick={() => handleAddQuestion()}>Add Question</Button>
         </div>
       </div>
-      <div>{console.log(`Quiz Question: ${question}`)}</div>
-      <div>{console.log(`Quiz URL: ${imageUrl}`)}</div>
       <div>
-        {console.log(
-          `Quiz AnswerOne: ${answerOne.answer} = ${answerOne.isCorrect}`
-        )}
-      </div>
-      <div>
-        {console.log(
-          `Quiz AnswerTwo: ${answerTwo.answer} = ${answerTwo.isCorrect}`
-        )}
-      </div>
-      <div>
-        {console.log(
-          `Quiz AnswerThree: ${answerThree.answer} = ${answerThree.isCorrect}`
-        )}
-      </div>
-      <div>
-        {console.log(
-          `Quiz AnswerFour: ${answerFour.answer} = ${answerFour.isCorrect}`
-        )}
-      </div>
-      <div>
-        {" "}
         {console.log(
           "Questions: \n_______________________\n" +
             JSON.stringify(questions[0]) +
