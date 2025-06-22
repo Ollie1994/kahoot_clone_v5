@@ -21,7 +21,7 @@ enum role {
 type user {
   id            Int
   role          role     @default(PLAYER)
-  username      String
+  username      String   @default("Host") Unique
   score         Int      @default(0)
 }
 

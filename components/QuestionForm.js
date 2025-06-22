@@ -9,12 +9,12 @@ import { createPost } from "../actions/quiz/actions";
 let nextId = 0;
 
 const QuestionForm = () => {
-  const [expand, setExpand] = useState(false);
+  /* const [expand, setExpand] = useState(false);
   const [code, setCode] = useState("");
   const [isLive, setIsLive] = useState(false);
   const [createdAt, setCreatedAt] = useState(Date.now());
   const [username, setUsername] = useState("");
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(0); */
   const [question, setQuestion] = useState("");
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -51,7 +51,11 @@ const QuestionForm = () => {
       code: "",
       isLive: false,
       createdAt: "",
-      players: [],
+      users: [{
+        id: 0,
+        role: "HOST",
+        score: 0
+      }],
       questions: questions,
     };
     createPost(quiz)
