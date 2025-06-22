@@ -54,7 +54,6 @@ const QuestionForm = () => {
       players: [],
       questions: questions,
     };
-    console.log(JSON.stringify(quiz))
     createPost(quiz)
   };
 

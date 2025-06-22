@@ -6,15 +6,16 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function createPost(data) {
-  const title = data.title
-  const questions = data.questions
+  const title = data.title;
+  const questions = data.questions;
+  
 
   await prisma.quizzes.create({
     data: {
       title,
-      code: "a1b2c3", // fix random
+      code: Math.random().toString(36).slice(2, 7).toUpperCase(),
       users: [], // change
-      questions
+      questions,
     },
   });
 
