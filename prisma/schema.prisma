@@ -13,28 +13,28 @@ datasource db {
 }
 
 
-enum role {
+enum Role {
   PLAYER
   HOST
 }
 
-type user {
-  id            Int
-  role          role     @default(PLAYER)
-  username      String
+type User {
+  id            Int      
+  role          Role     @default(PLAYER)
+  username      String   @default("Player")
   score         Int      @default(0)
 }
 
-type answer {
+type Answer {
   answer        String
   isCorrect     Boolean
 }
 
-type question {
+type Question {
   id            Int
   question      String
   imageUrl      String? 
-  answers       answer[]
+  answers       Answer[]
 }
 
 model quizzes {
@@ -43,7 +43,6 @@ model quizzes {
   code          String
   isLive        Boolean  @default(true)
   createdAt     DateTime @default(now())
-  users         user[]  
-  questions     question[]
-  
+  users         User[]
+  questions     Question[]
 }
