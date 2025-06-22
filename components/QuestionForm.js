@@ -48,12 +48,10 @@ const QuestionForm = () => {
   const createGame = () => {
     const quiz = {
       title: title,
-      code: "",
-      isLive: false,
-      createdAt: "",
       users: [{
         id: 0,
         role: "HOST",
+        username: "Host",
         score: 0
       }],
       questions: questions,

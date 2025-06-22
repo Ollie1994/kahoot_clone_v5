@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 export async function createPost(data) {
   const title = data.title;
-  const questions = data.questions;
+  const questions = data.questions
   const users = data.users
   
 
@@ -16,7 +16,8 @@ export async function createPost(data) {
       title,
       code: Math.random().toString(36).slice(2, 7).toUpperCase(),
       users,
-      questions,
+      questions
+      
     },
   });
 
