@@ -13,9 +13,14 @@ datasource db {
 }
 
 
+enum role {
+  PLAYER
+  HOST
+}
 
-
-type player {
+type user {
+  id            Int
+  role          role     @default(PLAYER)
   username      String
   score         Int      @default(0)
 }
@@ -38,7 +43,7 @@ model quizzes {
   code          String
   isLive        Boolean  @default(true)
   createdAt     DateTime @default(now())
-  players       player[]  
+  users         user[]  
   questions     question[]
   
 }
