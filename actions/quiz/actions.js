@@ -12,8 +12,8 @@ export async function createPost(data) {
   await prisma.quizzes.create({
     data: {
       title,
-      code: "a1b2c3",
-      players: [],
+      code: "a1b2c3", // fix random
+      users: [], // change
       questions
     },
   });
