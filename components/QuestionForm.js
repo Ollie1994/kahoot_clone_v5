@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "@/components/Button";
 import DividerLine from "./DividerLine";
 import Link from "next/link";
-import { createPost } from "../actions/quiz/actions";
+import { createQuiz } from "@/actions/quiz/actions";
 
 let nextId = 0;
 
@@ -48,15 +48,17 @@ const QuestionForm = () => {
   const createGame = () => {
     const quiz = {
       title: title,
-      users: [{
-        id: 0,
-        role: "HOST",
-        username: "Host",
-        score: 0
-      }],
+      users: [
+        {
+          id: 0,
+          role: "HOST",
+          username: "Host",
+          score: 0,
+        },
+      ],
       questions: questions,
     };
-    createPost(quiz)
+    createQuiz(quiz);
   };
 
   const handleAddQuestion = () => {

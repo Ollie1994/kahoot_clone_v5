@@ -9,7 +9,8 @@
       "@/helpers/*": ["helpers/*"],
       "@/lib/*": ["lib/*"],
       "@/public/*": ["public/*"],
-      "@/hooks/*": ["hooks/*"]
+      "@/hooks/*": ["hooks/*"],
+      "@/actions/*": ["actions/*"]
     }
   }
 }
