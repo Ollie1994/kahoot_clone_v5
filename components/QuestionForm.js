@@ -2,6 +2,12 @@
 import styles from "@/styles/questionForm.module.css";
 import { useState } from "react";
 import Button from "@/components/Button";
+import DividerLine from "./DividerLine";
+import Link from "next/link";
+import { createPost } from "../actions/quiz/actions";
+
+let nextId = 0;
+
 const QuestionForm = () => {
   const [expand, setExpand] = useState(false);
   const [code, setCode] = useState("");
@@ -10,6 +16,7 @@ const QuestionForm = () => {
   const [username, setUsername] = useState("");
   const [score, setScore] = useState(0);
   const [question, setQuestion] = useState("");
+  const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [answerOne, setAnswerOne] = useState({ answer: "", isCorrect: false });
   const [answerTwo, setAnswerTwo] = useState({ answer: "", isCorrect: false });
@@ -25,15 +32,48 @@ const QuestionForm = () => {
   // lists
   const [players, setPlayers] = useState([]);
   const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState([]);
 
   // funcs
+  const resetForm = () => {
+    setTimeout(() => {
+      setQuestion("");
+      setImageUrl("");
+      setAnswerOne({ answer: "", isCorrect: false });
+      setAnswerTwo({ answer: "", isCorrect: false });
+      setAnswerThree({ answer: "", isCorrect: false });
+      setAnswerFour({ answer: "", isCorrect: false });
+    }, 1000);
+  };
+
+  const createGame = () => {
+    const quiz = {
+      title: title,
+      code: "",
+      isLive: false,
+      createdAt: "",
+      players: [],
+      questions: questions,
+    };
+    console.log(JSON.stringify(quiz))
+    createPost(quiz)
+  };
+
+  const handleAddQuestion = () => {
+    const list = [];
+    list.push(answerOne, answerTwo, answerThree, answerFour);
+    setQuestions([
+      ...questions,
+      {
+        id: nextId++,
+        question: question,
+        imageUrl: imageUrl,
+        answers: list,
+      },
+    ]);
+    resetForm();
+  };
 
   const handleClick = (e) => {
-    console.log(`Clicked by: ${e}`);
-    console.log(
-      `FIRST ------ \n1=${answerOne.isCorrect} \n2=${answerTwo.isCorrect} \n3=${answerThree.isCorrect}\n4=${answerFour.isCorrect} `
-    );
     switch (e) {
       case "one":
         console.log("1?");
@@ -64,20 +104,30 @@ const QuestionForm = () => {
         setAnswerFour({ ...answerFour, isCorrect: true });
         break;
       default:
-      // code block
     }
-    console.log(
-      `SECOND ------ \n1=${answerOne.isCorrect} \n2=${answerTwo.isCorrect} \n3=${answerThree.isCorrect}\n4=${answerFour.isCorrect} `
-    );
   };
 
   return (
     <div className={styles.columnContainer}>
+      <div className={styles.quizFormTitleContainer}>
+        <h1 className={styles.createQuizFormTitle}>Create Quiz Form</h1>
+        <div className={styles.titleRowContainer}>
+          <div className={styles.columnContainer}>
+            <input
+              className={styles.titleFormInput}
+              type="text"
+              placeholder="Enter a title for your quiz"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+        </div>
+      </div>
+      <DividerLine></DividerLine>
       <div className={styles.rowContainer}>
         <h2 className={styles.title}>Create a question</h2>
-        <button>Minimize</button>
       </div>
-      <div className={styles.rowContainer}>
+      <div className={styles.columnContainer}>
         <div className={styles.questionContainer}>
           <textarea
             className={styles.questionFormInput}
@@ -104,7 +154,9 @@ const QuestionForm = () => {
                 type="text"
                 placeholder="Enter the first answer for your question"
                 value={answerOne.answer}
-                onChange={(e) => setAnswerOne({...answerOne, answer: e.target.value})}
+                onChange={(e) =>
+                  setAnswerOne({ ...answerOne, answer: e.target.value })
+                }
               />
               <Button onClick={() => handleClick("one")}>Correct</Button>
             </div>
@@ -114,7 +166,9 @@ const QuestionForm = () => {
                 type="text"
                 placeholder="Enter the second answer for your question"
                 value={answerTwo.answer}
-                onChange={(e) => setAnswerTwo({...answerTwo, answer: e.target.value})}
+                onChange={(e) =>
+                  setAnswerTwo({ ...answerTwo, answer: e.target.value })
+                }
               />
               <Button onClick={() => handleClick("two")}>Correct</Button>{" "}
             </div>
@@ -124,7 +178,9 @@ const QuestionForm = () => {
                 type="text"
                 placeholder="Enter the third answer for your question"
                 value={answerThree.answer}
-                onChange={(e) => setAnswerThree({...answerThree, answer: e.target.value})}
+                onChange={(e) =>
+                  setAnswerThree({ ...answerThree, answer: e.target.value })
+                }
               />
               <Button onClick={() => handleClick("three")}>Correct</Button>
             </div>
@@ -134,29 +190,35 @@ const QuestionForm = () => {
                 type="text"
                 placeholder="Enter the fourth answer for your question"
                 value={answerFour.answer}
-                onChange={(e) => setAnswerFour({...answerFour, answer: e.target.value})}
+                onChange={(e) =>
+                  setAnswerFour({ ...answerFour, answer: e.target.value })
+                }
               />
               <Button onClick={() => handleClick("four")}>Correct</Button>
             </div>
           </div>
         </div>
+        <div className={styles.buttonContainer}>
+          <Button onClick={() => handleAddQuestion()}>Add Question</Button>
+        </div>
       </div>
-      <div>{console.log(`Quiz Question: ${question}`)}</div>
-      <div>{console.log(`Quiz URL: ${imageUrl}`)}</div>
-      <div>
-        {console.log(`Quiz AnswerOne: ${answerOne.answer} = ${answerOne.isCorrect}`)}
+      <DividerLine></DividerLine>
+      <div className={styles.container}>
+        <Link href="/game">
+          <Button onClick={() => createGame()}>Create and Start Game</Button>
+        </Link>
       </div>
       <div>
-        {console.log(`Quiz AnswerTwo: ${answerTwo.answer} = ${answerTwo.isCorrect}`)}
-      </div>
-      <div>
+        {console.log(` \nQuiz Title: ${title} \n `)}
         {console.log(
-          `Quiz AnswerThree: ${answerThree.answer} = ${answerThree.isCorrect}`
-        )}
-      </div>
-      <div>
-        {console.log(
-          `Quiz AnswerFour: ${answerFour.answer} = ${answerFour.isCorrect}`
+          "Questions: \n_______________________\n" +
+            JSON.stringify(questions[0]) +
+            "\n________________________________\n" +
+            JSON.stringify(questions[1]) +
+            "\n________________________________\n" +
+            JSON.stringify(questions[2]) +
+            "\n________________________________" +
+            "\n "
         )}
       </div>
     </div>

@@ -1,28 +1,22 @@
 "use server";
 
 import { PrismaClient } from "@prisma/client";
-import { revalidatePath } from "next/cache";
+/* import { revalidatePath } from "next/cache"; */
 
 const prisma = new PrismaClient();
 
-export async function createPost(formData) {
-  const title = formData.get("title");
-  const code = "a1b2c3";
-  const isLive = null
-  const createdAt = ""
-  const players = []
-  const questions = formData.get("questions")
+export async function createPost(data) {
+  const title = data.title
+  const questions = data.questions
 
-  await prisma.post.create({
+  await prisma.quizzes.create({
     data: {
       title,
-      code,
-      isLive,
-      createdAt,
-      players,
+      code: "a1b2c3",
+      players: [],
       questions
     },
   });
 
-  revalidatePath("/game");
+  /*   revalidatePath("/game"); */
 }

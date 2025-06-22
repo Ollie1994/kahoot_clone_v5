@@ -11,21 +11,33 @@
 }
 .rowContainer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+}
+.questionContainer {
+  display: flex;
+  justify-content: center;
 }
 .questionFormInput {
   padding: 5px;
-  width: 20rem;
+  width: 35.5rem;
   height: 7rem;
   font-size: x-large;
   border-style: solid;
 }
+.imageUrlContainer {
+  display: flex;
+  justify-content: center;
+}
 .imageUrlFormInput {
   padding: 5px;
-  width: 20rem;
+  width: 35.5rem;
   height: 3rem;
   font-size: x-large;
   border-style: solid;
+}
+.answerContainer {
+  display: flex;
+  justify-content: center;
 }
 .answersGroup {
   display: flex;
@@ -35,10 +47,45 @@
 }
 .answersGroupRow {
   display: flex;
-  gap: 30px
+  gap: 30px;
 }
 .answerFormInput {
   border-style: solid;
-  height: 2rem;
-  width: 20rem;
+  height: 3rem;
+  width: 30rem;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+/*TITLE*/
+.quizFormTitleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.createQuizFormTitle {
+  display: flex;
+  justify-content: center;
+}
+.titleRowContainer {
+  display: flex;
+  gap: 1rem;
+}
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.titleFormInput {
+  width: 50rem;
+  height: 3rem;
+  font-size: x-large;
+}
+/*create and start*/ 
+.container {
+    display: flex;
+    justify-content: center;
 }
