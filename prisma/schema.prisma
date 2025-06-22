@@ -40,7 +40,7 @@ type Question {
 model quizzes {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   title         String   
-  code          String
+  code          String   @unique
   isLive        Boolean  @default(true)
   createdAt     DateTime @default(now())
   users         User[]

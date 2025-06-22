@@ -5,7 +5,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function createPost(data) {
+export async function createQuiz(data) {
   const title = data.title;
   const questions = data.questions
   const users = data.users
