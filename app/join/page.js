@@ -37,7 +37,7 @@ const Join = () => {
           />
         </div>
         <div className={styles.buttonContainer}>
-          <Link href="/lobby">
+          <Link href={`/lobby/${code}?username=${encodeURIComponent(username)}`}>
             <Button onClick={() => joinLobby()}>Join Lobby</Button>
           </Link>
         </div>
