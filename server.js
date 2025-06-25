@@ -33,6 +33,7 @@ app.prepare().then(() => {
       }
       io.to(room).emit("players_list", roomPlayers[room]);
       console.log(`User ${username} joined room ${room}`);
+      console.log("Users in all rooms:", roomPlayers);
     });
    /*  io.on("disconnect", () => {
       console.log(`User disconnected: ${socket.id}`);
