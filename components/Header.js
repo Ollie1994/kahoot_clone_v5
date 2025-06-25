@@ -7,6 +7,7 @@ const Header = () => {
       <div className={styles.linkContainer}>
         <Link href="/">Home</Link>
         <Link href="/createquiz">Create Quiz</Link>
+        <Link href="/join">Join Game</Link>
       </div>
     </header>
   );
