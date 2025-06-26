@@ -14,7 +14,6 @@ app.prepare().then(() => {
   const io = new Server(httpServer);
   const roomPlayers = {};
 
-
   // connection
   io.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
@@ -34,8 +33,13 @@ app.prepare().then(() => {
       io.to(room).emit("players_list", roomPlayers[room]);
       console.log(`User ${username} joined room ${room}`);
       console.log("Users in all rooms:", roomPlayers);
+
+      // TEST För att navigare alla till /game
+      socket.on("navigate_game", ({ room }) => {
+        io.to(room).emit("navigate_game"); // Broadcast to everyone in room
+      });
     });
-   /*  io.on("disconnect", () => {
+    /*  io.on("disconnect", () => {
       console.log(`User disconnected: ${socket.id}`);
     }); */
     // ------------------- test grejer ---------------------------

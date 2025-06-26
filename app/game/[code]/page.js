@@ -1,28 +1,19 @@
 "use client";
 import { socket } from "@/lib/socketClient";
 import { useEffect, useState } from "react";
-const Game = () => {
+import { useSearchParams } from "next/navigation";
+import { use } from "react";
 
-    
-  /* const [room, setRoom] = useState(1234);
-  const [joined, setJoined] = useState(false);
-  const [username, setUsername] = useState(""); */
-/* 
-  useEffect(() => {
-    socket.on("user_joined");
-    return () => {
-      socket.off("user_joined");
-    };
-  }, []);
+const Game = ({ params }) => {
+  const searchParams = useSearchParams()
+  const username = searchParams.get("username");
+  const { code } = use(params);
 
-  // 
-  const handleJoinRoom = () => {
-    if (room && username) {
-      socket.emit("join-room", { room, username: username });
-      setJoined(true);
-    }
-  }; */
-
-  return <>Game Room </>;
+  return (
+    <>
+      Game Room
+      <div>User: {username}</div>
+    </>
+  );
 };
 export default Game;
