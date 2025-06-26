@@ -3,12 +3,15 @@ import { socket } from "@/lib/socketClient";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { use } from "react";
+import LobbyHost from "@/components/LobbyHost";
+import LobbyUser from "@/components/LobbyUser";
 
 const Lobby = ({ params }) => {
   const searchParams = useSearchParams();
   const username = searchParams.get("username");
   const { code } = use(params);
   const [players, setPlayers] = useState([]);
+  const Layout = username === "Host" ? LobbyHost : LobbyUser;
 
   useEffect(() => {
     // Join room
@@ -25,16 +28,7 @@ const Lobby = ({ params }) => {
     };
   }, [code, username]);
 
-  return (
-    <>
-      <h2>Players:</h2>
-      <ul>
-        {players.map((player, index) => (
-          <li key={index}>{player}</li>
-        ))}
-      </ul>
-    </>
-  );
+  return <Layout username={username} players={players} code={code} />;
 };
 
 export default Lobby;

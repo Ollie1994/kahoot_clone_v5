@@ -1,0 +1,29 @@
+.container {
+  gap: 2rem;
+  padding: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-style: solid;
+}
+.joinContainer {
+  display: flex;
+  justify-content: center;
+  border-style: solid;
+}
+.listHeaderContainer {
+  display: flex;
+  justify-content: space-between;
+  border-style: solid;
+  padding: 1rem;
+}
+.playerCounterContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
