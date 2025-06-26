@@ -8,13 +8,18 @@ import { useRouter } from "next/navigation";
 const Join = () => {
   const [code, setCode] = useState("");
   const [username, setUsername] = useState("");
-  const router = useRouter()
+  const router = useRouter();
 
-  const joinLobby = () => {
+  async function joinLobby() {
     const data = { username: username, code: code };
-    addPlayerToQuiz(data);
-    router.push(`/lobby/${code}?username=${encodeURIComponent(username)}`);
-  };
+    const check = await addPlayerToQuiz(data);
+    console.log("?: " + check);
+    if (check) {
+      router.push(`/lobby/${code}?username=${encodeURIComponent(username)}`);
+    } else {
+      setUsername("That username already exists, please enter a new one");
+    }
+  }
 
   return (
     <div className={styles.container}>

@@ -4,7 +4,6 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function addPlayerToQuiz(data) {
-
   const code = data.code;
   const username = data.username;
 
@@ -19,6 +18,14 @@ export async function addPlayerToQuiz(data) {
     score: 0,
   };
 
+  const usernameExists = users.some(
+    (user) => user.username === newUser.username
+  );
+
+  if (usernameExists) {
+    return false;
+  }
+
   await prisma.quizzes.update({
     where: {
       code: code,
@@ -29,4 +36,5 @@ export async function addPlayerToQuiz(data) {
       },
     },
   });
+  return true;
 }
