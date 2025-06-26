@@ -2,17 +2,18 @@
 import styles from "@/styles/join.module.css";
 import { addPlayerToQuiz } from "@/actions/join/actions";
 import { useState } from "react";
-import Link from "next/link";
 import Button from "@/components/Button";
+import { useRouter } from "next/navigation";
 
 const Join = () => {
   const [code, setCode] = useState("");
   const [username, setUsername] = useState("");
+  const router = useRouter()
 
   const joinLobby = () => {
     const data = { username: username, code: code };
-
     addPlayerToQuiz(data);
+    router.push(`/lobby/${code}?username=${encodeURIComponent(username)}`);
   };
 
   return (
@@ -37,9 +38,7 @@ const Join = () => {
           />
         </div>
         <div className={styles.buttonContainer}>
-          <Link href={`/lobby/${code}?username=${encodeURIComponent(username)}`}>
-            <Button onClick={() => joinLobby()}>Join Lobby</Button>
-          </Link>
+          <Button onClick={() => joinLobby()}>Join Lobby</Button>
         </div>
       </div>
     </div>

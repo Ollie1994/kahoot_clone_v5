@@ -7,19 +7,18 @@ const prisma = new PrismaClient();
 
 export async function createQuiz(data) {
   const title = data.title;
-  const questions = data.questions
-  const users = data.users
-  
+  const questions = data.questions;
+  const users = data.users;
+  const code = Math.random().toString(36).slice(2, 7).toUpperCase()
 
   await prisma.quizzes.create({
     data: {
       title,
-      code: Math.random().toString(36).slice(2, 7).toUpperCase(),
+      code: code,
       users,
-      questions
-      
+      questions,
     },
   });
-
+  return code;
   /*   revalidatePath("/game"); */
 }

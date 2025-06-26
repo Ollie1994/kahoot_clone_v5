@@ -3,8 +3,8 @@ import styles from "@/styles/questionForm.module.css";
 import { useState } from "react";
 import Button from "@/components/Button";
 import DividerLine from "./DividerLine";
-import Link from "next/link";
 import { createQuiz } from "@/actions/quiz/actions";
+import { useRouter } from "next/navigation";
 
 let nextId = 0;
 
@@ -13,7 +13,6 @@ const QuestionForm = () => {
   const [code, setCode] = useState("");
   const [isLive, setIsLive] = useState(false);
   const [createdAt, setCreatedAt] = useState(Date.now());
-  const [username, setUsername] = useState("");
   const [score, setScore] = useState(0); */
   const [question, setQuestion] = useState("");
   const [title, setTitle] = useState("");
@@ -28,6 +27,7 @@ const QuestionForm = () => {
     answer: "",
     isCorrect: false,
   });
+  const router = useRouter();
 
   // lists
   const [players, setPlayers] = useState([]);
@@ -45,7 +45,7 @@ const QuestionForm = () => {
     }, 1000);
   };
 
-  const createGame = () => {
+  async function createGame() {
     const quiz = {
       title: title,
       users: [
@@ -58,7 +58,8 @@ const QuestionForm = () => {
       ],
       questions: questions,
     };
-    createQuiz(quiz);
+    const code = await createQuiz(quiz);
+    router.push(`/lobby/${code}?username=${encodeURIComponent("Host")}`);
   };
 
   const handleAddQuestion = () => {
@@ -207,22 +208,7 @@ const QuestionForm = () => {
       </div>
       <DividerLine></DividerLine>
       <div className={styles.container}>
-        <Link href={`/lobby/${code}?username=${encodeURIComponent(username)}`}>
-          <Button onClick={() => createGame()}>Create and Start Game</Button>
-        </Link>
-      </div>
-      <div>
-        {console.log(` \nQuiz Title: ${title} \n `)}
-        {console.log(
-          "Questions: \n_______________________\n" +
-            JSON.stringify(questions[0]) +
-            "\n________________________________\n" +
-            JSON.stringify(questions[1]) +
-            "\n________________________________\n" +
-            JSON.stringify(questions[2]) +
-            "\n________________________________" +
-            "\n "
-        )}
+        <Button onClick={() => createGame()}>Create and Start Game</Button>
       </div>
     </div>
   );
