@@ -45,4 +45,7 @@ model quizzes {
   createdAt     DateTime @default(now())
   users         User[]
   questions     Question[]
+
+
+   @@unique([id, users.username])
 }
