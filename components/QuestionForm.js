@@ -207,7 +207,7 @@ const QuestionForm = () => {
       </div>
       <DividerLine></DividerLine>
       <div className={styles.container}>
-        <Link href="/game">
+        <Link href={`/lobby/${code}?username=${encodeURIComponent(username)}`}>
           <Button onClick={() => createGame()}>Create and Start Game</Button>
         </Link>
       </div>
