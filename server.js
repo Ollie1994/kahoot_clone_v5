@@ -43,11 +43,10 @@ app.prepare().then(() => {
     // -------------------------------- COUNTER --------------------------------------
     socket.on("start-timer", () => {
       const room = socket.data.room;
+      const username = socket.data.username;
       if (!room) return;
-
       if (roomTimers[room]) return; // ✅ Prevent multiple timers in same room
-
-      let countdown = 100;
+      let countdown = 10;
 
       roomTimers[room] = setInterval(() => {
         io.to(room).emit("timer", { countdown });
@@ -56,6 +55,9 @@ app.prepare().then(() => {
         if (countdown < 0) {
           clearInterval(roomTimers[room]);
           delete roomTimers[room];
+          if (username === "Host") {
+            io.to(room).emit("navigate_game");
+          }
         }
       }, 1000);
     });

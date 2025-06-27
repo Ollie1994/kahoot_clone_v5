@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.questionContainer {
+  display: flex;
+  justify-content: center;
+}
+.numberContainer {
+  display: flex;
+  justify-content: center;
+}
+.countdownContainer {
+  display: flex;
+  justify-content: center;
+}
