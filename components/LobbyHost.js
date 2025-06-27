@@ -1,7 +1,7 @@
 import styles from "@/styles/lobbyHost.module.css";
 import Button from "./Button";
 
-const LobbyHost = ({ players, code }) => {
+const LobbyHost = ({ players, code, startGame={startGame}}) => {
   return (
     <div className={styles.container}>
       <div className={styles.joinContainer}>
@@ -12,7 +12,7 @@ const LobbyHost = ({ players, code }) => {
           Number of players: {players.length}
         </h2>
         <div className={styles.buttonContainer}>
-          <Button>Start game</Button>
+          <Button onClick={startGame}>Start game</Button>
         </div>
       </div>
       <div className={styles.playerListContainer}>

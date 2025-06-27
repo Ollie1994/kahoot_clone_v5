@@ -13,7 +13,7 @@ app.prepare().then(() => {
   const httpServer = createServer(handle);
   const io = new Server(httpServer);
   const roomPlayers = {};
-
+  const roomTimers = {};
 
   // connection
   io.on("connection", (socket) => {
@@ -35,16 +35,30 @@ app.prepare().then(() => {
       console.log(`User ${username} joined room ${room}`);
       console.log("Users in all rooms:", roomPlayers);
     });
-   /*  io.on("disconnect", () => {
-      console.log(`User disconnected: ${socket.id}`);
-    }); */
-    // ------------------- test grejer ---------------------------
-    socket.on("ready", () => {
-      // Send message to everyone
-      io.emit("message", "Everyone gets this because client said ready!!!!");
-      // --------------------------------------------------------
+    // ---------------------- För att navigare alla till /game ------------------------------
+    socket.on("navigate_game", ({ room }) => {
+      io.to(room).emit("navigate_game");
     });
 
+    // -------------------------------- COUNTER --------------------------------------
+    socket.on("start-timer", () => {
+      const room = socket.data.room;
+      if (!room) return;
+
+      if (roomTimers[room]) return; // ✅ Prevent multiple timers in same room
+
+      let countdown = 100;
+
+      roomTimers[room] = setInterval(() => {
+        io.to(room).emit("timer", { countdown });
+        countdown--;
+
+        if (countdown < 0) {
+          clearInterval(roomTimers[room]);
+          delete roomTimers[room];
+        }
+      }, 1000);
+    });
     // Handle disconnect
     socket.on("disconnect", () => {
       const room = socket.data.room;

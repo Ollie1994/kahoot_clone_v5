@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { use } from "react";
 import LobbyHost from "@/components/LobbyHost";
 import LobbyUser from "@/components/LobbyUser";
+import { useRouter } from "next/navigation";
 
 const Lobby = ({ params }) => {
   const searchParams = useSearchParams();
@@ -12,6 +13,7 @@ const Lobby = ({ params }) => {
   const { code } = use(params);
   const [players, setPlayers] = useState([]);
   const Layout = username === "Host" ? LobbyHost : LobbyUser;
+  const router = useRouter();
 
   useEffect(() => {
     // Join room
@@ -22,13 +24,28 @@ const Lobby = ({ params }) => {
       setPlayers(list);
     });
 
+    socket.on("navigate_game", () => {
+      router.push(`/game/${code}?username=${encodeURIComponent(username)}`);
+    });
     // Cleanup
     return () => {
       socket.off("players_list");
+      socket.off("navigate_game");
     };
   }, [code, username]);
 
-  return <Layout username={username} players={players} code={code} />;
+  const startGame = () => {
+    socket.emit("navigate_game", { room: code }); // or just socket.emit("navigate_game", room)
+  };
+
+  return (
+    <Layout
+      username={username}
+      players={players}
+      code={code}
+      startGame={startGame}
+    />
+  );
 };
 
 export default Lobby;
