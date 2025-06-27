@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.titleContainer {
+  display: flex;
+  justify-content: center;
+}
+.countdownContainer {
+  display: flex;
+  justify-content: center;
+}
