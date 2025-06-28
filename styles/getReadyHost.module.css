@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem;
+  gap: 2rem;
+}
+.questionContainer {
+  display: flex;
+  justify-content: center;
+}
+.titleContainer {
+display: flex;
+justify-content: center;
+}
+
+.numberContainer {
+  display: flex;
+  justify-content: center;
+}
+.countdownContainer {
+  display: flex;
+  justify-content: center;
+}
