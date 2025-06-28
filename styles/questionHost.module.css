@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.middleContainer {
+  display: flex;
+}
+.imgContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.countdownContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.answersContainer {
+  display: flex;
+  justify-content: center;
+}
+.leftContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.triangleContainer {
+    display: flex;
+    justify-content: center;
+    background-color: red;
+}
+.starContainer {
+    display: flex;
+    justify-content: center;
+    background-color: yellow;
+}
+.circleContainer {
+    display: flex;
+    justify-content: center;
+    background-color: blue;
+}
+.squareContainer {
+    display: flex;
+    justify-content: center;
+    background-color: green;
+}
