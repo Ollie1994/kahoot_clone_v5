@@ -1,0 +1,63 @@
+.container {
+}
+
+.answersContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 84vh;
+  width: 100vw;
+  gap: 1rem;
+  padding: 1rem;
+}
+.topContainer {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  gap: 1rem;
+}
+.bottomContainer {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+    gap: 1rem;
+
+}
+.triangleContainer {
+  display: flex;
+  justify-content: center;
+  background-color: red;
+  width: 100%;
+  height: 100%;
+  padding: 3rem;
+  border-radius: 50px;
+}
+.starContainer {
+  display: flex;
+  justify-content: center;
+  background-color: yellow;
+  width: 100%;
+  height: 100%;
+  padding: 3rem;
+  border-radius: 50px;
+}
+.circleContainer {
+  display: flex;
+  justify-content: center;
+  background-color: blue;
+  width: 100%;
+  height: 100%;
+  padding: 3rem;
+  border-radius: 50px;
+}
+.squareContainer {
+  display: flex;
+  justify-content: center;
+  background-color: green;
+  width: 100%;
+  height: 100%;
+  padding: 3rem;
+  border-radius: 50px;
+}

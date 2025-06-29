@@ -20,7 +20,7 @@ const Game = ({ params }) => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/game/${code}`);
+        const res = await fetch(`/api/game/${code}`);
         const data = await res.json();
         console.log(data);
         setQuiz(data);

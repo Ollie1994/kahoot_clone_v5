@@ -21,7 +21,7 @@ const GetReady = ({ params }) => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/getready/${code}`);
+        const res = await fetch(`/api/getready/${code}`);
         const data = await res.json();
         console.log(data);
         setQuiz(data);
