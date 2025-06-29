@@ -1,5 +1,4 @@
-.container {
-}
+
 
 .answersContainer {
   display: flex;
@@ -22,8 +21,7 @@
   justify-content: center;
   height: 100%;
   width: 100%;
-    gap: 1rem;
-
+  gap: 1rem;
 }
 .triangleContainer {
   display: flex;
@@ -33,6 +31,7 @@
   height: 100%;
   padding: 3rem;
   border-radius: 50px;
+  cursor: pointer;
 }
 .starContainer {
   display: flex;
@@ -42,6 +41,7 @@
   height: 100%;
   padding: 3rem;
   border-radius: 50px;
+  cursor: pointer;
 }
 .circleContainer {
   display: flex;
@@ -51,6 +51,7 @@
   height: 100%;
   padding: 3rem;
   border-radius: 50px;
+  cursor: pointer;
 }
 .squareContainer {
   display: flex;
@@ -60,4 +61,29 @@
   height: 100%;
   padding: 3rem;
   border-radius: 50px;
+  cursor: pointer;
+}
+.triangleContainer:hover {
+  background-color: rgb(255, 255, 255);
+}
+.triangleContainer:focus {
+  background-color: rgb(255, 255, 255);
+}
+.starContainer:hover {
+  background-color: rgb(255, 255, 255);
+}
+.starContainer:focus {
+  background-color: rgb(255, 255, 255);
+}
+.circleContainer:hover {
+  background-color: rgb(255, 255, 255);
+}
+.circleContainer:focus {
+  background-color: rgb(255, 255, 255);
+}
+.squareContainer:hover {
+  background-color: rgb(255, 255, 255);
+}
+.squareContainer:focus {
+  background-color: rgb(255, 255, 255);
 }

@@ -16,6 +16,7 @@ const Question = ({ params }) => {
   const [questions, setQuestions] = useState([]);
   const router = useRouter();
   const Layout = username === "Host" ? QuestionHost : QuestionPlayer;
+  const [dataFromChild, setDataFromChild] = useState("");
 
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -26,7 +27,6 @@ const Question = ({ params }) => {
         setQuiz(data);
         setPlayers(data.users);
         setQuestions(data.questions);
-        console.log("test: " + players);
       } catch (err) {
         console.log("Error " + err);
       } finally {
@@ -50,6 +50,18 @@ const Question = ({ params }) => {
     };
   }, [code, username]);
 
-  return <Layout questions={questions} countdown={countdown} />;
+  // ------ funcs -----------
+  function handleDataFromChild(data) {
+    setDataFromChild(data);
+    console.log(`Player ${username} gave the answer - ${data}`)
+  }
+
+  return (
+    <Layout
+      questions={questions}
+      countdown={countdown}
+      sendDataToParent={handleDataFromChild}
+    />
+  );
 };
 export default Question;
