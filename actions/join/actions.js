@@ -7,7 +7,7 @@ export async function addPlayerToQuiz(data) {
   const code = data.code;
   const username = data.username;
 
-  const res = await fetch(`http://localhost:3000/api/join/${code}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/join/${code}`);
   const users = await res.json();
 
   const maxId = users.reduce((max, user) => Math.max(max, user.id), 0);
