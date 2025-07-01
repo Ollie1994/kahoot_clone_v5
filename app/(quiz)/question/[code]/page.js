@@ -17,7 +17,7 @@ const Question = ({ params }) => {
   const router = useRouter();
   const Layout = username === "Host" ? QuestionHost : QuestionPlayer;
   const [dataFromChild, setDataFromChild] = useState("");
-
+  // --------------- useEffect -----------------------------------
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
@@ -50,10 +50,40 @@ const Question = ({ params }) => {
     };
   }, [code, username]);
 
-  // ------ funcs -----------
+  // ----------------------------- funcs -----------------------------------------------------
   function handleDataFromChild(data) {
     setDataFromChild(data);
-    console.log(`Player ${username} gave the answer - ${data}`)
+    console.log(`Player ${username} gave the answer - ${data}`);
+    switch (data) {
+      case "redOne":
+        if (questions?.[0]?.answers?.[0].isCorrect === true) {
+          console.log("RIGHT ANSWER");
+        } else {
+          console.log("WRONG ANSWER");
+        }
+        break;
+      case "blueTwo":
+        if (questions?.[0]?.answers?.[1].isCorrect === true) {
+          console.log("RIGHT ANSWER");
+        } else {
+          console.log("WRONG ANSWER");
+        }
+        break;
+      case "yellowThree":
+        if (questions?.[0]?.answers?.[2].isCorrect === true) {
+          console.log("RIGHT ANSWER");
+        } else {
+          console.log("WRONG ANSWER");
+        }
+        break;
+      case "greenFour":
+        if (questions?.[0]?.answers?.[3].isCorrect === true) {
+          console.log("RIGHT ANSWER");
+        } else {
+          console.log("WRONG ANSWER");
+        }
+        break;
+    }
   }
 
   return (

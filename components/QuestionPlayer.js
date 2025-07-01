@@ -9,23 +9,23 @@ const QuestionPlayer = ({ sendDataToParent }) => {
       <div className={styles.answersContainer}>
         <div className={styles.topContainer}>
           <button
-            onClick={() => handleClick("one")}
+            onClick={() => handleClick("redOne")}
             className={styles.triangleContainer}
           ></button>
 
           <button
-            onClick={() => handleClick("two")}
+            onClick={() => handleClick("blueTwo")}
             className={styles.circleContainer}
           ></button>
         </div>
 
         <div className={styles.bottomContainer}>
           <button
-            onClick={() => handleClick("three")}
+            onClick={() => handleClick("yellowThree")}
             className={styles.starContainer}
           ></button>
           <button
-            onClick={() => handleClick("four")}
+            onClick={() => handleClick("greenFour")}
             className={styles.squareContainer}
           ></button>
         </div>
