@@ -24,24 +24,24 @@ const QuestionHost = ({ questions, countdown }) => {
         <div className={styles.topContainer}>
           <div className={styles.triangleContainer}>
             <h2>
-              {questions?.[0]?.answers?.[0].answer || "Loading answer 1..."}
+              {questions?.[0]?.answers?.[0].answer || "Loading answer redOne..."}
             </h2>
           </div>
           <div className={styles.circleContainer}>
             <h2>
-              {questions?.[0]?.answers?.[1].answer || "Loading answer 2..."}
+              {questions?.[0]?.answers?.[1].answer || "Loading answer blueTwo..."}
             </h2>
           </div>
         </div>
         <div className={styles.bottomContainer}>
           <div className={styles.starContainer}>
             <h2>
-              {questions?.[0]?.answers?.[2].answer || "Loading answer 3..."}
+              {questions?.[0]?.answers?.[2].answer || "Loading answer yellowThree..."}
             </h2>
           </div>
           <div className={styles.squareContainer}>
             <h2>
-              {questions?.[0]?.answers?.[3].answer || "Loading answer 4..."}
+              {questions?.[0]?.answers?.[3].answer || "Loading answer greenFour..."}
             </h2>
           </div>
         </div>
