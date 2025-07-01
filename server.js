@@ -14,6 +14,7 @@ app.prepare().then(() => {
   const io = new Server(httpServer);
   const roomPlayers = {};
   const roomTimers = {};
+  const roomScores = {};
 
   // connection
   io.on("connection", (socket) => {
@@ -31,6 +32,10 @@ app.prepare().then(() => {
       if (!roomPlayers[room].includes(username)) {
         roomPlayers[room].push(username);
       }
+      // Initialize score
+      if (!roomScores[room]) roomScores[room] = {};
+      if (!roomScores[room][username]) roomScores[room][username] = 0;
+
       io.to(room).emit("players_list", roomPlayers[room]);
       console.log(`User ${username} joined room ${room}`);
       console.log("Users in all rooms:", roomPlayers);
@@ -61,7 +66,16 @@ app.prepare().then(() => {
         }
       }, 1000);
     });
-    // Handle disconnect
+    // ---------------------------- Handle answers ---------------------------------------
+    socket.on("answer-question", ({ room, username, points }) => {
+      console.log("Serverside points:" + points)
+      roomScores[room][username] += points; // or whatever your score rule is
+    });
+    //----------------- Optionally emit updated scores to all players
+    socket.on("player-scores", ({ room }) => {
+      io.to(room).emit("score-update", {updatedScores: roomScores[room]});
+    });
+    // Handle disconnect ---------------------------------------------------
     socket.on("disconnect", () => {
       const room = socket.data.room;
       const username = socket.data.username;

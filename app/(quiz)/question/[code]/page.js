@@ -12,11 +12,12 @@ const Question = ({ params }) => {
   const { code } = use(params);
   const [quiz, setQuiz] = useState({});
   const [players, setPlayers] = useState([]);
+  const [playerAnswer, setPlayerAnswer] = useState("");
+  const [points, setPoints] = useState(0);
   const [countdown, setCountdown] = useState(10);
   const [questions, setQuestions] = useState([]);
   const router = useRouter();
   const Layout = username === "Host" ? QuestionHost : QuestionPlayer;
-  const [dataFromChild, setDataFromChild] = useState("");
   // --------------- useEffect -----------------------------------
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -40,50 +41,85 @@ const Question = ({ params }) => {
     if (username === "Host") {
       socket.emit("start-timer");
     }
+
     socket.on("navigate_game", () => {
-      router.push(`/question/${code}?username=${encodeURIComponent(username)}`);
+      console.log("before switch: " + playerAnswer)
+      switch (playerAnswer) {
+        case "redOne":
+          console.log("caseOne");
+          if (questions?.[0]?.answers?.[0].isCorrect === true) {
+            console.log(`Right Answer ${username}, you got ${points} points`);
+            socket.emit("answer-question", {
+              room: code,
+              username: username,
+              points: points,
+            });
+          } else {
+            console.log("WRONG ANSWER");
+          }
+          break;
+        case "blueTwo":
+          console.log("caseTwo");
+
+          if (questions?.[0]?.answers?.[1].isCorrect === true) {
+            console.log(`Right Answer ${username}, you got ${points} points`);
+            socket.emit("answer-question", {
+              room: code,
+              username: username,
+              points: points,
+            });
+          } else {
+            console.log("WRONG ANSWER");
+          }
+          break;
+        case "yellowThree":
+          console.log("caseThree");
+
+          if (questions?.[0]?.answers?.[2].isCorrect === true) {
+            console.log(`Right Answer ${username}, you got ${points} points`);
+            socket.emit("answer-question", {
+              room: code,
+              username: username,
+              points: points,
+            });
+          } else {
+            console.log("WRONG ANSWER");
+          }
+          break;
+        case "greenFour":
+          console.log("caseFour");
+
+          if (questions?.[0]?.answers?.[3].isCorrect === true) {
+            console.log(`Right Answer ${username}, you got ${points} points`);
+            socket.emit("answer-question", {
+              room: code,
+              username: username,
+              points: points,
+            });
+          } else {
+            console.log("WRONG ANSWER");
+          }
+          break;
+      }
+
+      router.push(`/result/${code}?username=${encodeURIComponent(username)}`);
     });
+
     fetchQuiz();
     return () => {
       socket.off("timer");
       socket.off("navigate_game");
     };
-  }, [code, username]);
+  }, [code, username, playerAnswer]);
 
   // ----------------------------- funcs -----------------------------------------------------
   function handleDataFromChild(data) {
-    setDataFromChild(data);
-    console.log(`Player ${username} gave the answer - ${data}`);
-    switch (data) {
-      case "redOne":
-        if (questions?.[0]?.answers?.[0].isCorrect === true) {
-          console.log("RIGHT ANSWER");
-        } else {
-          console.log("WRONG ANSWER");
-        }
-        break;
-      case "blueTwo":
-        if (questions?.[0]?.answers?.[1].isCorrect === true) {
-          console.log("RIGHT ANSWER");
-        } else {
-          console.log("WRONG ANSWER");
-        }
-        break;
-      case "yellowThree":
-        if (questions?.[0]?.answers?.[2].isCorrect === true) {
-          console.log("RIGHT ANSWER");
-        } else {
-          console.log("WRONG ANSWER");
-        }
-        break;
-      case "greenFour":
-        if (questions?.[0]?.answers?.[3].isCorrect === true) {
-          console.log("RIGHT ANSWER");
-        } else {
-          console.log("WRONG ANSWER");
-        }
-        break;
-    }
+    setPlayerAnswer(data);
+    const earnedPoints = countdown * 100;
+    setPoints(earnedPoints);
+    console.log(
+      `FUNC - Player ${username} gave the answer - ${data} and potentially got ${earnedPoints} points`
+    );
   }
 
   return (
