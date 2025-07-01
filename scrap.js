@@ -13,7 +13,6 @@ const Lobby = ({ params }) => {
 
   useEffect(() => {
     socket.on("user_joined");
-    console.log("Joining room:", room);
     socket.emit("join-room", { room, username: username });
     return () => {
       socket.off("user_joined");

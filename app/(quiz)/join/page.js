@@ -13,7 +13,6 @@ const Join = () => {
   async function joinLobby() {
     const data = { username: username, code: code };
     const check = await addPlayerToQuiz(data);
-    console.log("?: " + check);
     if (check) {
       router.push(`/lobby/${code}?username=${encodeURIComponent(username)}`);
     } else {

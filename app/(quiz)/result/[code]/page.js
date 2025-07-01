@@ -25,7 +25,6 @@ const Result = ({ params }) => {
     }
     socket.on("score-update", ({ updatedScores }) => {
       setScores(updatedScores);
-      console.log(updatedScores);
     });
     return () => {
       socket.off("score-update");

@@ -23,11 +23,9 @@ const GetReady = ({ params }) => {
       try {
         const res = await fetch(`/api/getready/${code}`);
         const data = await res.json();
-        console.log(data);
         setQuiz(data);
         setPlayers(data.users);
         setQuestions(data.questions);
-        console.log("test: " + players);
       } catch (err) {
         console.log("Error " + err);
       } finally {

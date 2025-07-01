@@ -22,10 +22,8 @@ const Game = ({ params }) => {
       try {
         const res = await fetch(`/api/game/${code}`);
         const data = await res.json();
-        console.log(data);
         setQuiz(data);
         setPlayers(data.users);
-        console.log("test: " + players);
       } catch (err) {
         console.log("Error " + err);
       } finally {
