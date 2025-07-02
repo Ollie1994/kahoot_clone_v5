@@ -1,8 +1,13 @@
 import styles from "@/styles/resultPlayer.module.css";
-const ResultPlayer = ({ isCorrect, points }) => {
+const ResultPlayer = ({ isCorrect, points, countdown }) => {
   return (
     <div className={styles.container}>
-      <div>{isCorrect === "true" ? "You guessed Correctly" : "You guessed incorrectly"}</div>
+      <h1>{countdown}</h1>
+      <div>
+        {isCorrect === "true"
+          ? "You guessed Correctly"
+          : "You guessed Incorrectly"}
+      </div>
       <div> Points awarded: {points}</div>
     </div>
   );

@@ -1,9 +1,17 @@
 import styles from "@/styles/questionHost.module.css";
-const QuestionHost = ({ questions, countdown }) => {
+const QuestionHost = ({
+  questions,
+  countdown,
+  currentQuestion,
+  totalNumberOfQuestions,
+}) => {
   return (
     <div className={styles.container}>
       <div className={styles.questionContainer}>
-        <h1> {questions?.[0]?.question || "Loading question..."}</h1>
+        <h1>
+          {" "}
+          {questions?.[currentQuestion - 1]?.question || "Loading question..."}
+        </h1>
       </div>
 
       <div className={styles.middleContainer}>
@@ -12,7 +20,7 @@ const QuestionHost = ({ questions, countdown }) => {
         </div>
         <div className={styles.imgContainer}>
           <img
-            src={questions?.[0]?.imageUrl || "Loading img..."}
+            src={questions?.[currentQuestion - 1]?.imageUrl || "Loading img..."}
             alt="image"
           ></img>
         </div>
@@ -24,24 +32,28 @@ const QuestionHost = ({ questions, countdown }) => {
         <div className={styles.topContainer}>
           <div className={styles.triangleContainer}>
             <h2>
-              {questions?.[0]?.answers?.[0].answer || "Loading answer redOne..."}
+              {questions?.[currentQuestion - 1]?.answers?.[0].answer ||
+                "Loading answer redOne..."}
             </h2>
           </div>
           <div className={styles.circleContainer}>
             <h2>
-              {questions?.[0]?.answers?.[1].answer || "Loading answer blueTwo..."}
+              {questions?.[currentQuestion - 1]?.answers?.[1].answer ||
+                "Loading answer blueTwo..."}
             </h2>
           </div>
         </div>
         <div className={styles.bottomContainer}>
           <div className={styles.starContainer}>
             <h2>
-              {questions?.[0]?.answers?.[2].answer || "Loading answer yellowThree..."}
+              {questions?.[currentQuestion - 1]?.answers?.[2].answer ||
+                "Loading answer yellowThree..."}
             </h2>
           </div>
           <div className={styles.squareContainer}>
             <h2>
-              {questions?.[0]?.answers?.[3].answer || "Loading answer greenFour..."}
+              {questions?.[currentQuestion - 1]?.answers?.[3].answer ||
+                "Loading answer greenFour..."}
             </h2>
           </div>
         </div>

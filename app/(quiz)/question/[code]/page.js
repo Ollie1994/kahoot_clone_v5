@@ -16,6 +16,8 @@ const Question = ({ params }) => {
   const [points, setPoints] = useState(0);
   const [countdown, setCountdown] = useState(10);
   const [questions, setQuestions] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [totalNumberOfQuestions, setTotalNumberQuestions] = useState(0);
   const router = useRouter();
   const Layout = username === "Host" ? QuestionHost : QuestionPlayer;
   // --------------- useEffect -----------------------------------
@@ -32,6 +34,17 @@ const Question = ({ params }) => {
       } finally {
       }
     };
+    socket.emit("current_question", {
+      room: code,
+    });
+    socket.on(
+      "current_question_state",
+      ({ currentQuestion, numberOfQuestions }) => {
+        setCurrentQuestion(currentQuestion);
+        setTotalNumberQuestions(numberOfQuestions);
+      }
+    );
+
     socket.emit("join-room", { room: code, username });
 
     socket.on("timer", ({ countdown }) => {
@@ -46,7 +59,9 @@ const Question = ({ params }) => {
       let score = points;
       switch (playerAnswer) {
         case "redOne":
-          if (questions?.[0]?.answers?.[0].isCorrect === true) {
+          if (
+            questions?.[currentQuestion - 1]?.answers?.[0].isCorrect === true
+          ) {
             isCorrect = true;
             socket.emit("answer-question", {
               room: code,
@@ -59,8 +74,9 @@ const Question = ({ params }) => {
           }
           break;
         case "blueTwo":
-
-          if (questions?.[0]?.answers?.[1].isCorrect === true) {
+          if (
+            questions?.[currentQuestion - 1]?.answers?.[1].isCorrect === true
+          ) {
             isCorrect = true;
             socket.emit("answer-question", {
               room: code,
@@ -73,8 +89,9 @@ const Question = ({ params }) => {
           }
           break;
         case "yellowThree":
-
-          if (questions?.[0]?.answers?.[2].isCorrect === true) {
+          if (
+            questions?.[currentQuestion - 1]?.answers?.[2].isCorrect === true
+          ) {
             isCorrect = true;
             socket.emit("answer-question", {
               room: code,
@@ -87,8 +104,9 @@ const Question = ({ params }) => {
           }
           break;
         case "greenFour":
-
-          if (questions?.[0]?.answers?.[3].isCorrect === true) {
+          if (
+            questions?.[currentQuestion - 1]?.answers?.[3].isCorrect === true
+          ) {
             isCorrect = true;
             socket.emit("answer-question", {
               room: code,
@@ -115,6 +133,7 @@ const Question = ({ params }) => {
     return () => {
       socket.off("timer");
       socket.off("navigate_game");
+      socket.off("current_question_state");
     };
   }, [code, username, playerAnswer]);
 
@@ -130,6 +149,8 @@ const Question = ({ params }) => {
       questions={questions}
       countdown={countdown}
       sendDataToParent={handleDataFromChild}
+      currentQuestion={currentQuestion}
+      totalNumberOfQuestions={totalNumberOfQuestions}
     />
   );
 };

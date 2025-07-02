@@ -38,15 +38,22 @@ const Game = ({ params }) => {
       socket.emit("start-timer");
     }
     socket.on("navigate_game", () => {
+      console.log("INSIDE init_room_state !!!!!");
+      if (username === "Host") {
+        socket.emit("init_room_state", {
+          room: code,
+          totalQuestions: quiz.questions.length,
+        });
+      }
       router.push(`/getready/${code}?username=${encodeURIComponent(username)}`);
     });
-  
+
     fetchQuiz();
     return () => {
       socket.off("timer");
-      socket.off("navigate_game")
+      socket.off("navigate_game");
     };
-  }, [code, username]);
+  }, [countdown, code, username]);
 
   return <Layout title={quiz.title} players={players} countdown={countdown} />;
 };
