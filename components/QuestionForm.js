@@ -80,28 +80,24 @@ const QuestionForm = () => {
   const handleClick = (e) => {
     switch (e) {
       case "one":
-        console.log("1?");
         setAnswerOne({ ...answerOne, isCorrect: true });
         setAnswerTwo({ ...answerTwo, isCorrect: false });
         setAnswerThree({ ...answerThree, isCorrect: false });
         setAnswerFour({ ...answerFour, isCorrect: false });
         break;
       case "two":
-        console.log("2?");
         setAnswerOne({ ...answerOne, isCorrect: false });
         setAnswerTwo({ ...answerTwo, isCorrect: true });
         setAnswerThree({ ...answerThree, isCorrect: false });
         setAnswerFour({ ...answerFour, isCorrect: false });
         break;
       case "three":
-        console.log("3?");
         setAnswerOne({ ...answerOne, isCorrect: false });
         setAnswerTwo({ ...answerTwo, isCorrect: false });
         setAnswerThree({ ...answerThree, isCorrect: true });
         setAnswerFour({ ...answerFour, isCorrect: false });
         break;
       case "four":
-        console.log("4?");
         setAnswerOne({ ...answerOne, isCorrect: false });
         setAnswerTwo({ ...answerTwo, isCorrect: false });
         setAnswerThree({ ...answerThree, isCorrect: false });

@@ -15,6 +15,7 @@ app.prepare().then(() => {
   const roomPlayers = {};
   const roomTimers = {};
   const roomScores = {};
+  const roomState = {};
 
   // connection
   io.on("connection", (socket) => {
@@ -68,14 +69,41 @@ app.prepare().then(() => {
     });
     // ---------------------------- Handle answers ---------------------------------------
     socket.on("answer-question", ({ room, username, points }) => {
-      console.log("Serverside points:" + points)
+      console.log("Serverside points:" + points);
       roomScores[room][username] += points; // or whatever your score rule is
     });
-    //----------------- Optionally emit updated scores to all players
-    socket.on("player-scores", ({ room }) => {
-      io.to(room).emit("score-update", {updatedScores: roomScores[room]});
+    // -------- ------------- Handle questions ----------------------------------------------
+    // Initialize questions
+    socket.on("init_room_state", ({ room, totalQuestions }) => {
+      if (!roomState[room]) {
+        roomState[room] = {
+          currentQuestion: 0,
+          numberOfQuestions: totalQuestions,
+        };
+      }
+      console.log("serverside-init: ", roomState[room]);
+      console.log("question states in all rooms:", roomState);
     });
-    // Handle disconnect ---------------------------------------------------
+    // advances the Q state before each upcoming Q
+    socket.on("next_question", ({ room }) => {
+      if (roomState[room]) {
+        roomState[room].currentQuestion++;
+      }
+      console.log("serverside - next: ", roomState[room]);
+      console.log("question states in all rooms:", roomState);
+    });
+    // ----- retrieves the current roomState and emits it back to the client -----------------
+    socket.on("current_question", ({ room }) => {
+      io.to(room).emit("current_question_state", roomState[room]);
+      console.log("serverside-current: ", roomState[room]);
+      console.log("question states in all rooms:", roomState);
+    });
+
+    //----------------- updated scores to all playersn --------------------------
+    socket.on("player-scores", ({ room }) => {
+      io.to(room).emit("score-update", { updatedScores: roomScores[room] });
+    });
+    //  ---------------------- handle disconnect ---------------------------------------------------
     socket.on("disconnect", () => {
       const room = socket.data.room;
       const username = socket.data.username;
