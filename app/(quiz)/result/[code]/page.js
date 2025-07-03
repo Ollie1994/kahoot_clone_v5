@@ -37,6 +37,7 @@ const Result = ({ params }) => {
         ({ currentQuestion, numberOfQuestions }) => {
           const question = currentQuestion;
           const tot = numberOfQuestions;
+          console.log(`Q = ${question} /// TOT = ${tot} for user ${username}`)
           if (question >= tot) {
             router.push(
               `/scoreboard/${code}?username=${encodeURIComponent(username)}`
