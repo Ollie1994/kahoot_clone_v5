@@ -1,45 +1,36 @@
-import { createServer } from "node:http";
-import next from "next";
-import { Server } from "socket.io";
+import { joinRoom } from "./handlers/joinRoom"
 
-const dev = process.env.NODE_ENV !== "production";
-const hostname = process.env.HOSTNAME || "localhost";
-const port = parseInt(process.env.PORT || "3000", 10);
 
-const app = next({ dev, hostname, port });
-const handle = app.getRequestHandler();
+export function handleSocketEvents(socket, io) {
+  socket.on("join-room", ({room, username}) => joinRoom(socket, io, {room, username}));
+}
 
-app.prepare().then(() => {
-  const httpServer = createServer(handle);
-  const io = new Server(httpServer);
-  const roomPlayers = {};
-  const roomTimers = {};
-  const roomScores = {};
-  const roomState = {};
-
-  // connection
-  io.on("connection", (socket) => {
-    console.log(`User connected: ${socket.id}`);
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ // all under gammalt och ska delas upp
+ 
     socket.on("join-room", ({ room, username }) => {
-      socket.join(room);
-      // store data
-      socket.data.room = room;
-      socket.data.username = username;
-      // Add player to room memory
-      if (!roomPlayers[room]) {
-        roomPlayers[room] = [];
-      }
-      // Prevent duplicates (in case of reconnect)
-      if (!roomPlayers[room].includes(username)) {
-        roomPlayers[room].push(username);
-      }
-      // Initialize score
-      if (!roomScores[room]) roomScores[room] = {};
-      if (!roomScores[room][username]) roomScores[room][username] = 0;
-
-      io.to(room).emit("players_list", roomPlayers[room]);
-      console.log(`User ${username} joined room ${room}`);
-      console.log("Users in all rooms:", roomPlayers);
+  
     });
     // ---------------------- För att navigare alla till /game ------------------------------
     socket.on("navigate_game", ({ room }) => {
@@ -118,11 +109,3 @@ app.prepare().then(() => {
         console.log(`User ${username} disconnected from room ${room}`);
       }
     });
-  });
-
-  httpServer.listen(port, () => {
-    console.log(`Server running on http://${hostname}:${port}`);
-  });
-});
-
-// -------------- Allt över är det mest basic ----------------------------------------
