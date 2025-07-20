@@ -24,18 +24,18 @@ const Lobby = ({ params }) => {
       setPlayers(list);
     });
 
-    socket.on("navigate_game", () => {
+    socket.on("navigate_to_game", () => {
       router.push(`/game/${code}?username=${encodeURIComponent(username)}`);
     });
     // Cleanup
     return () => {
       socket.off("players_list");
-      socket.off("navigate_game");
+      socket.off("navigate_to_game");
     };
   }, [code, username]);
 
   const startGame = () => {
-    socket.emit("navigate_game", { room: code }); // or just socket.emit("navigate_game", room)
+    socket.emit("navigate_to_game", { room: code }); 
   };
 
   return (

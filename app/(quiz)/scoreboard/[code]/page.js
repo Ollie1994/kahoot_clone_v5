@@ -18,12 +18,11 @@ const Scoreboard = ({ params }) => {
   useEffect(() => {
     socket.emit("join-room", { room: code, username });
 
-    
-      socket.emit("player-scores", { room: code });
-    
     socket.on("score-update", ({ updatedScores }) => {
       setScores(updatedScores);
     });
+    socket.emit("player-scores", { room: code });
+
     return () => {
       socket.off("score-update");
     };

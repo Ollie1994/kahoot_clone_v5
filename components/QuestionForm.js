@@ -5,6 +5,8 @@ import Button from "@/components/Button";
 import DividerLine from "./DividerLine";
 import { createQuiz } from "@/actions/quiz/actions";
 import { useRouter } from "next/navigation";
+import { socket } from "@/lib/socketClient";
+
 
 let nextId = 0;
 
@@ -59,8 +61,18 @@ const QuestionForm = () => {
       questions: questions,
     };
     const code = await createQuiz(quiz);
+    console.log(
+      "---✅--- INIT room_state... code: ",
+      code,
+      ", quiz length - ",
+      questions.length
+    );
+    socket.emit("init_room_state", {
+      room: code,
+      totalQuestions: questions.length,
+    });
     router.push(`/lobby/${code}?username=${encodeURIComponent("Host")}`);
-  };
+  }
 
   const handleAddQuestion = () => {
     const list = [];

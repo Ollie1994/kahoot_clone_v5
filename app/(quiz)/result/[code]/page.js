@@ -14,6 +14,8 @@ const Result = ({ params }) => {
   const points = searchParams.get("points");
   const [countdown, setCountdown] = useState(10);
   const router = useRouter();
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [totalNumberOfQuestions, setTotalNumberQuestions] = useState(0);
 
   const { code } = use(params);
   const [scores, setScores] = useState({});
@@ -24,44 +26,46 @@ const Result = ({ params }) => {
     socket.on("timer", ({ countdown }) => {
       setCountdown(countdown);
     });
-    if (username === "Host") {
-      socket.emit("start-timer");
-    }
-    socket.on("navigate_game", () => {
-      // add if no more questions logic here eaither getready or scoreboard
-      socket.emit("current_question", {
-        room: code,
-      });
-      socket.on(
-        "current_question_state",
-        ({ currentQuestion, numberOfQuestions }) => {
-          const question = currentQuestion;
-          const tot = numberOfQuestions;
-          console.log(`Q = ${question} /// TOT = ${tot} for user ${username}`)
-          if (question >= tot) {
-            router.push(
-              `/scoreboard/${code}?username=${encodeURIComponent(username)}`
-            );
-          } else {
-            router.push(
-              `/getready/${code}?username=${encodeURIComponent(username)}`
-            );
-          }
-        }
+    socket.on("navigate_get_ready", () => {
+      router.push(`/getready/${code}?username=${encodeURIComponent(username)}`);
+    });
+    socket.on("navigate_scoreboard", () => {
+      router.push(
+        `/scoreboard/${code}?username=${encodeURIComponent(username)}`
       );
     });
-
-    if (username === "Host") {
-      socket.emit("player-scores", { room: code });
-    }
+    socket.on(
+      "current_question_state",
+      ({ currentQuestion, numberOfQuestions }) => {
+        setCurrentQuestion(currentQuestion);
+        setTotalNumberQuestions(numberOfQuestions);
+      }
+    );
     socket.on("score-update", ({ updatedScores }) => {
       setScores(updatedScores);
     });
+    socket.on("time_to_nav", () => {
+      if (username === "Host") {
+        socket.emit("navigate_choice", { room: code });
+      }
+    });
+
+    socket.emit("current_question", {
+      room: code,
+    });
+    if (username === "Host") {
+      socket.emit("player-scores", { room: code });
+    }
+    if (username === "Host") {
+      socket.emit("start-timer");
+    }
     return () => {
+      socket.off("time_to_nav");
       socket.off("score-update");
       socket.off("timer");
-      socket.off("navigate_game");
+      socket.off("navigate_get_ready");
       socket.off("current_question_state");
+      socket.off("navigate_scoreboard");
     };
   }, [code, username]);
   return (

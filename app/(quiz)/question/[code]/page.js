@@ -34,9 +34,8 @@ const Question = ({ params }) => {
       } finally {
       }
     };
-    socket.emit("current_question", {
-      room: code,
-    });
+    socket.emit("join-room", { room: code, username });
+
     socket.on(
       "current_question_state",
       ({ currentQuestion, numberOfQuestions }) => {
@@ -45,20 +44,18 @@ const Question = ({ params }) => {
       }
     );
 
-    socket.emit("join-room", { room: code, username });
-
     socket.on("timer", ({ countdown }) => {
       setCountdown(countdown);
     });
-    if (username === "Host") {
-      socket.emit("start-timer");
-    }
 
-    socket.on("navigate_game", () => {
+    socket.on("navigate", () => {
       let isCorrect = false;
       let score = points;
       switch (playerAnswer) {
         case "redOne":
+          console.log(
+            "redOne - " + currentQuestion + "/" + totalNumberOfQuestions
+          );
           if (
             questions?.[currentQuestion - 1]?.answers?.[0].isCorrect === true
           ) {
@@ -74,6 +71,9 @@ const Question = ({ params }) => {
           }
           break;
         case "blueTwo":
+          console.log(
+            "blueTwo - " + currentQuestion + "/" + totalNumberOfQuestions
+          );
           if (
             questions?.[currentQuestion - 1]?.answers?.[1].isCorrect === true
           ) {
@@ -89,6 +89,9 @@ const Question = ({ params }) => {
           }
           break;
         case "yellowThree":
+          console.log(
+            "yellowThree - " + currentQuestion + "/" + totalNumberOfQuestions
+          );
           if (
             questions?.[currentQuestion - 1]?.answers?.[2].isCorrect === true
           ) {
@@ -104,6 +107,9 @@ const Question = ({ params }) => {
           }
           break;
         case "greenFour":
+          console.log(
+            "greenFour - " + currentQuestion + "/" + totalNumberOfQuestions
+          );
           if (
             questions?.[currentQuestion - 1]?.answers?.[3].isCorrect === true
           ) {
@@ -120,6 +126,18 @@ const Question = ({ params }) => {
           break;
       }
 
+      console.log(
+        "User " +
+          username +
+          " isCorrect = < " +
+          isCorrect +
+          " > and got a score of " +
+          score +
+          " during round < " +
+          currentQuestion +
+          " >"
+      );
+
       router.push(
         `/result/${code}?username=${encodeURIComponent(
           username
@@ -128,11 +146,23 @@ const Question = ({ params }) => {
         )}&points=${encodeURIComponent(score)}`
       );
     });
+    socket.emit("current_question", {
+      room: code,
+    });
+    socket.on("time_to_nav", () => {
+      if (username === "Host") {
+        socket.emit("navigate_game", { room: code });
+      }
+    });
+    if (username === "Host") {
+      socket.emit("start-timer");
+    }
 
     fetchQuiz();
     return () => {
+      socket.off("navigate")
+      socket.off("time_to_nav");
       socket.off("timer");
-      socket.off("navigate_game");
       socket.off("current_question_state");
     };
   }, [code, username, playerAnswer]);
