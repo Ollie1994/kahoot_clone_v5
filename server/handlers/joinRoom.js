@@ -1,5 +1,5 @@
-import { roomPlayers } from "server/states/states";
-import { roomScores } from "server/states/states";
+import { roomPlayers } from "../states/states.js"
+import { roomScores } from "../states/states.js"
 
 export function joinRoom(socket, io, { room, username }) {
     socket.join(room);

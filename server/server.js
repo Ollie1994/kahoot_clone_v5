@@ -1,7 +1,7 @@
 import { createServer } from "node:http";
 import next from "next";
 import { Server } from "socket.io";
-import { socketHandlers } from "./socketHandlers";
+import { socketHandler } from "./socketHandler.js";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = process.env.HOSTNAME || "localhost";
@@ -19,7 +19,7 @@ app.prepare().then(() => {
     console.log(`User connected: ${socket.id}`);
 
     // sends the socket and io to the socket handler
-    socketHandlers(socket, io);
+    socketHandler(socket, io);
   });
 
   httpServer.listen(port, () => {

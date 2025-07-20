@@ -1,3 +1,7 @@
+
+
 export function navigateGame(socket, io, { room }) {
-  io.to(room).emit("navigate_game");
+  console.log("Basic NAV");
+
+  io.to(room).emit("navigate");
 }

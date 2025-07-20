@@ -1,4 +1,4 @@
-import { roomPlayers } from "server/states/states";
+import { roomPlayers } from "../states/states.js"
 export function disconnect(socket, io) {
   const room = socket.data.room;
   const username = socket.data.username;

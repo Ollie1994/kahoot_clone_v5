@@ -13,6 +13,8 @@ const Game = ({ params }) => {
   const { code } = use(params);
   const [quiz, setQuiz] = useState({});
   const [players, setPlayers] = useState([]);
+  const [questions, setQuestions] = useState([]);
+
   const [countdown, setCountdown] = useState(10);
   const Layout = username === "Host" ? GameStartHost : GameStartPlayer;
   const router = useRouter();
@@ -24,6 +26,7 @@ const Game = ({ params }) => {
         const data = await res.json();
         setQuiz(data);
         setPlayers(data.users);
+        setQuestions(data.questions);
       } catch (err) {
         console.log("Error " + err);
       } finally {
@@ -34,24 +37,24 @@ const Game = ({ params }) => {
     socket.on("timer", ({ countdown }) => {
       setCountdown(countdown);
     });
-    if (username === "Host") {
-      socket.emit("start-timer");
-    }
-    socket.on("navigate_game", () => {
-      console.log("INSIDE init_room_state !!!!!");
+    socket.on("time_to_nav", () => {
       if (username === "Host") {
-        socket.emit("init_room_state", {
-          room: code,
-          totalQuestions: quiz.questions.length,
-        });
+        socket.emit("navigate_game", { room: code });
       }
+    });
+
+    socket.on("navigate", () => {
       router.push(`/getready/${code}?username=${encodeURIComponent(username)}`);
     });
 
+    if (username === "Host") {
+      socket.emit("start-timer");
+    }
     fetchQuiz();
     return () => {
+      socket.off("time_to_nav");
       socket.off("timer");
-      socket.off("navigate_game");
+      socket.off("navigate");
     };
   }, [countdown, code, username]);
 

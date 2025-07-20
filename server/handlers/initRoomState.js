@@ -1,4 +1,4 @@
-import { roomState } from "server/states/states";
+import { roomState } from "../states/states.js"
 export function initRoomState(socket, io, { room, totalQuestions }) {
   if (!roomState[room]) {
     roomState[room] = {

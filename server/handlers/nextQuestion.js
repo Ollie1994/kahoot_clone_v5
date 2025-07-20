@@ -1,4 +1,4 @@
-import { roomState } from "server/states/states";
+import { roomState } from "../states/states.js"
 export function nextQuestion(socket, io, { room }) {
   if (roomState[room]) {
     roomState[room].currentQuestion++;

@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "dev:socket": "node server.js",
+    "dev:socket": "node server/server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

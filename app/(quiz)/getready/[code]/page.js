@@ -34,15 +34,12 @@ const GetReady = ({ params }) => {
       } finally {
       }
     };
-    // 🧠 Make sure this logic only runs once and only if user is Host
-    if (!hasEmittedRef.current && username === "Host") {
-      hasEmittedRef.current = true; // prevent future emits
-      console.log("✅ Emitting next_question...");
-      socket.emit("next_question", { room: code });
-    }
-
-    socket.emit("current_question", {
-      room: code,
+    socket.emit("join-room", { room: code, username });
+    socket.on("timer", ({ countdown }) => {
+      setCountdown(countdown);
+    });
+    socket.on("navigate", () => {
+      router.push(`/question/${code}?username=${encodeURIComponent(username)}`);
     });
     socket.on(
       "current_question_state",
@@ -52,22 +49,30 @@ const GetReady = ({ params }) => {
       }
     );
 
-    socket.emit("join-room", { room: code, username });
-
-    socket.on("timer", ({ countdown }) => {
-      setCountdown(countdown);
+    // 🧠 Make sure this logic only runs once and only if user is Host
+    if (!hasEmittedRef.current && username === "Host") {
+      hasEmittedRef.current = true; // prevent future emits
+      console.log("✅ Emitting next_question...");
+      socket.emit("next_question", { room: code });
+    }
+    socket.on("time_to_nav", () => {
+      if (username === "Host") {
+        socket.emit("navigate_game", { room: code });
+      }
     });
+    socket.emit("current_question", {
+      room: code,
+    });
+
     if (username === "Host") {
       socket.emit("start-timer");
     }
 
-    socket.on("navigate_game", () => {
-      router.push(`/question/${code}?username=${encodeURIComponent(username)}`);
-    });
     fetchQuiz();
     return () => {
+       socket.off("time_to_nav");
       socket.off("timer");
-      socket.off("navigate_game");
+      socket.off("navigate");
       socket.off("current_question_state");
     };
   }, [code, username]);

@@ -1,4 +1,5 @@
-import { roomTimers } from "server/states/states";
+import { roomTimers } from "../states/states.js";
+import { navigateGame } from "./navigateGame.js";
 
 export function startTimer(socket, io) {
   const room = socket.data.room;
@@ -14,9 +15,8 @@ export function startTimer(socket, io) {
     if (countdown < 0) {
       clearInterval(roomTimers[room]);
       delete roomTimers[room];
-      if (username === "Host") {
-        io.to(room).emit("navigate_game");
-      }
+      console.log("before time to nav ???");
+      io.to(room).emit("time_to_nav");
     }
   }, 1000);
 }
