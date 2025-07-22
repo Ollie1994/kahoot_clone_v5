@@ -23,7 +23,6 @@ const Question = ({ params }) => {
   // --------------- useEffect -----------------------------------
   useEffect(() => {
     socket.on("quiz_data", ({data}) => {
-      console.log("quiz data - ", data)
       setQuiz(data);
       setPlayers(data.users);
       setQuestions(data.questions);
