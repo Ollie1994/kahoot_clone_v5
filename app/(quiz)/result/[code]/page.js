@@ -22,7 +22,7 @@ const Result = ({ params }) => {
   const Layout = username === "Host" ? ResultHost : ResultPlayer;
 
   useEffect(() => {
-    socket.emit("join-room", { room: code, username });
+    socket.emit("join_room", { room: code, username });
     socket.on("timer", ({ countdown }) => {
       setCountdown(countdown);
     });
@@ -41,7 +41,7 @@ const Result = ({ params }) => {
         setTotalNumberQuestions(numberOfQuestions);
       }
     );
-    socket.on("score-update", ({ updatedScores }) => {
+    socket.on("score_update", ({ updatedScores }) => {
       setScores(updatedScores);
     });
     socket.on("time_to_nav", () => {
@@ -54,14 +54,14 @@ const Result = ({ params }) => {
       room: code,
     });
     if (username === "Host") {
-      socket.emit("player-scores", { room: code });
+      socket.emit("player_scores", { room: code });
     }
     if (username === "Host") {
-      socket.emit("start-timer");
+      socket.emit("start_timer");
     }
     return () => {
       socket.off("time_to_nav");
-      socket.off("score-update");
+      socket.off("score_update");
       socket.off("timer");
       socket.off("navigate_get_ready");
       socket.off("current_question_state");

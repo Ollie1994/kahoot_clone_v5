@@ -17,7 +17,7 @@ const Lobby = ({ params }) => {
 
   useEffect(() => {
     // Join room
-    socket.emit("join-room", { room: code, username });
+    socket.emit("join_room", { room: code, username });
 
     // Update full player list
     socket.on("players_list", (list) => {
@@ -35,7 +35,7 @@ const Lobby = ({ params }) => {
   }, [code, username]);
 
   const startGame = () => {
-    socket.emit("navigate_to_game", { room: code }); 
+    socket.emit("navigate_to_game", { room: code });
   };
 
   return (

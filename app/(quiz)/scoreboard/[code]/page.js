@@ -16,15 +16,15 @@ const Scoreboard = ({ params }) => {
   const Layout = username === "Host" ? ScoreboardHost : ScoreboardPlayer;
 
   useEffect(() => {
-    socket.emit("join-room", { room: code, username });
+    socket.emit("join_room", { room: code, username });
 
-    socket.on("score-update", ({ updatedScores }) => {
+    socket.on("score_update", ({ updatedScores }) => {
       setScores(updatedScores);
     });
-    socket.emit("player-scores", { room: code });
+    socket.emit("player_scores", { room: code });
 
     return () => {
-      socket.off("score-update");
+      socket.off("score_update");
     };
   }, [code, username]);
 

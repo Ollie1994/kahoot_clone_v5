@@ -22,19 +22,14 @@ const GetReady = ({ params }) => {
   const hasEmittedRef = useRef(false);
 
   useEffect(() => {
-    const fetchQuiz = async () => {
-      try {
-        const res = await fetch(`/api/getready/${code}`);
-        const data = await res.json();
-        setQuiz(data);
-        setPlayers(data.users);
-        setQuestions(data.questions);
-      } catch (err) {
-        console.log("Error " + err);
-      } finally {
-      }
-    };
-    socket.emit("join-room", { room: code, username });
+    socket.on("quiz_data", ({ data }) => {
+      console.log("quiz data - ", data);
+      setQuiz(data);
+      setPlayers(data.users);
+      setQuestions(data.questions);
+    });
+
+    socket.emit("join_room", { room: code, username });
     socket.on("timer", ({ countdown }) => {
       setCountdown(countdown);
     });
@@ -60,17 +55,19 @@ const GetReady = ({ params }) => {
         socket.emit("navigate_game", { room: code });
       }
     });
+    socket.emit("get_quiz", { room: code });
+
     socket.emit("current_question", {
       room: code,
     });
 
     if (username === "Host") {
-      socket.emit("start-timer");
+      socket.emit("start_timer");
     }
 
-    fetchQuiz();
     return () => {
-       socket.off("time_to_nav");
+      socket.off("quiz_data");
+      socket.off("time_to_nav");
       socket.off("timer");
       socket.off("navigate");
       socket.off("current_question_state");
