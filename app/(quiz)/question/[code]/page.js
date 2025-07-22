@@ -22,19 +22,14 @@ const Question = ({ params }) => {
   const Layout = username === "Host" ? QuestionHost : QuestionPlayer;
   // --------------- useEffect -----------------------------------
   useEffect(() => {
-    const fetchQuiz = async () => {
-      try {
-        const res = await fetch(`http://localhost:3000/api/question/${code}`);
-        const data = await res.json();
-        setQuiz(data);
-        setPlayers(data.users);
-        setQuestions(data.questions);
-      } catch (err) {
-        console.log("Error " + err);
-      } finally {
-      }
-    };
-    socket.emit("join-room", { room: code, username });
+    socket.on("quiz_data", ({data}) => {
+      console.log("quiz data - ", data)
+      setQuiz(data);
+      setPlayers(data.users);
+      setQuestions(data.questions);
+    });
+
+    socket.emit("join_room", { room: code, username });
 
     socket.on(
       "current_question_state",
@@ -60,7 +55,7 @@ const Question = ({ params }) => {
             questions?.[currentQuestion - 1]?.answers?.[0].isCorrect === true
           ) {
             isCorrect = true;
-            socket.emit("answer-question", {
+            socket.emit("answer_question", {
               room: code,
               username: username,
               points: score,
@@ -78,7 +73,7 @@ const Question = ({ params }) => {
             questions?.[currentQuestion - 1]?.answers?.[1].isCorrect === true
           ) {
             isCorrect = true;
-            socket.emit("answer-question", {
+            socket.emit("answer_question", {
               room: code,
               username: username,
               points: score,
@@ -96,7 +91,7 @@ const Question = ({ params }) => {
             questions?.[currentQuestion - 1]?.answers?.[2].isCorrect === true
           ) {
             isCorrect = true;
-            socket.emit("answer-question", {
+            socket.emit("answer_question", {
               room: code,
               username: username,
               points: score,
@@ -114,7 +109,7 @@ const Question = ({ params }) => {
             questions?.[currentQuestion - 1]?.answers?.[3].isCorrect === true
           ) {
             isCorrect = true;
-            socket.emit("answer-question", {
+            socket.emit("answer_question", {
               room: code,
               username: username,
               points: score,
@@ -154,13 +149,15 @@ const Question = ({ params }) => {
         socket.emit("navigate_game", { room: code });
       }
     });
+    socket.emit("get_quiz", { room: code });
+
     if (username === "Host") {
-      socket.emit("start-timer");
+      socket.emit("start_timer");
     }
 
-    fetchQuiz();
     return () => {
-      socket.off("navigate")
+      socket.off("quiz_data");
+      socket.off("navigate");
       socket.off("time_to_nav");
       socket.off("timer");
       socket.off("current_question_state");

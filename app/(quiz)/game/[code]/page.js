@@ -24,6 +24,7 @@ const Game = ({ params }) => {
       try {
         const res = await fetch(`/api/game/${code}`);
         const data = await res.json();
+        socket.emit("set_quiz", { room: code, quiz: data });
         setQuiz(data);
         setPlayers(data.users);
         setQuestions(data.questions);
@@ -32,7 +33,7 @@ const Game = ({ params }) => {
       } finally {
       }
     };
-    socket.emit("join-room", { room: code, username });
+    socket.emit("join_room", { room: code, username });
 
     socket.on("timer", ({ countdown }) => {
       setCountdown(countdown);
@@ -48,7 +49,7 @@ const Game = ({ params }) => {
     });
 
     if (username === "Host") {
-      socket.emit("start-timer");
+      socket.emit("start_timer");
     }
     fetchQuiz();
     return () => {
