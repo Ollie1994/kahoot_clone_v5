@@ -18,13 +18,35 @@ const Scoreboard = ({ params }) => {
   useEffect(() => {
     socket.emit("join_room", { room: code, username });
 
+    socket.on("timer", ({ countdown }) => {
+      setCountdown(countdown);
+    });
+
+    socket.on("navigate_home", () => {
+      router.push(`/`);
+    });
+
     socket.on("score_update", ({ updatedScores }) => {
       setScores(updatedScores);
     });
+
     socket.emit("player_scores", { room: code });
+
+    socket.on("time_to_nav", () => {
+      if (username === "Host") {
+        socket.emit("end_of_game", { room: code });
+      }
+    });
+
+    if (username === "Host") {
+      socket.emit("start_timer");
+    }
 
     return () => {
       socket.off("score_update");
+      socket.off("timer");
+      socket.off("navigate_home");
+      socket.off("time_to_nav");
     };
   }, [code, username]);
 

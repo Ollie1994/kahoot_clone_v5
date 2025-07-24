@@ -1,6 +1,7 @@
 import { answerQuestion } from "./handlers/answerQuestion.js";
 import { currentQuestion } from "./handlers/currentQuestion.js";
 import { disconnect } from "./handlers/disconnect.js";
+import { endOfGame } from "./handlers/endOfGame.js";
 import { getQuiz } from "./handlers/getQuiz.js";
 import { initRoomState } from "./handlers/initRoomState.js";
 import { joinRoom } from "./handlers/joinRoom.js";
@@ -36,6 +37,9 @@ export function socketHandler(socket, io) {
   socket.on("navigate_to_game", ({ room }) =>
     navigateToGame(socket, io, { room })
   );
-   socket.on("set_quiz", ({ room, quiz }) => setQuiz(socket, io, { room, quiz }));
+  socket.on("set_quiz", ({ room, quiz }) =>
+    setQuiz(socket, io, { room, quiz })
+  );
   socket.on("get_quiz", ({ room }) => getQuiz(socket, io, { room }));
+  socket.on("end_of_game", ({ room }) => endOfGame(socket, io, { room }));
 }
