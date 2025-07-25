@@ -1,6 +1,6 @@
 "use server";
 
-import GameClient from "@/components/gameClient";
+import GameClient from "@/components/GameClient";
 import { getQuizByCode } from "@/lib/getQuizByCode";
 
 const Game = async (props) => {
