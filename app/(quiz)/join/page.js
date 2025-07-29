@@ -1,4 +1,3 @@
-"use server";
 import JoinClient from "@/components/JoinClient";
 
 const Join = () => {

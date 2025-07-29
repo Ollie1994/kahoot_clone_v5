@@ -1,4 +1,3 @@
-"use server";
 
 import QuestionClient from "@/components/QuestionClient";
 

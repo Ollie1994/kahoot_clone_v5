@@ -1,4 +1,3 @@
-"use server";
 
 import ResultClient from "@/components/ResultClient";
 

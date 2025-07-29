@@ -1,5 +1,4 @@
-"use client";
-import { useEffect } from "react";
+
 
 // My home page or "/"
 export default function Home() {

@@ -1,4 +1,3 @@
-"use server";
 import ScoreboardClient from "@/components/ScoreboardClient";
 
 const Scoreboard = async (props) => {
