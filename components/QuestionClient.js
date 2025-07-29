@@ -20,7 +20,7 @@ const QuestionClient = ({ code }) => {
   const Layout = username === "Host" ? QuestionHost : QuestionPlayer;
   // --------------- useEffect -----------------------------------
   useEffect(() => {
-    socket.on("quiz_data", ({data}) => {
+    socket.on("quiz_data", ({ data }) => {
       setQuiz(data);
       setPlayers(data.users);
       setQuestions(data.questions);
@@ -159,7 +159,7 @@ const QuestionClient = ({ code }) => {
       socket.off("timer");
       socket.off("current_question_state");
     };
-  }, [code, username, playerAnswer]);
+  }, [playerAnswer]);
 
   // ----------------------------- funcs -----------------------------------------------------
   function handleDataFromChild(data) {

@@ -70,7 +70,7 @@ const GetReadyClient = ({ code }) => {
       socket.off("navigate");
       socket.off("current_question_state");
     };
-  }, [code, username]);
+  }, []);
   // ------------------- funcs --------------------------
 
   return (

@@ -46,7 +46,7 @@ const ScoreboardClient = ({ code }) => {
       socket.off("navigate_home");
       socket.off("time_to_nav");
     };
-  }, [code, username]);
+  }, []);
 
   return <Layout scores={scores} username={username} />;
 };

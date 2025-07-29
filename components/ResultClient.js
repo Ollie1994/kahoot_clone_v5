@@ -64,7 +64,7 @@ const ResultClient = ({ code }) => {
       socket.off("current_question_state");
       socket.off("navigate_scoreboard");
     };
-  }, [code, username]);
+  }, []);
   return (
     <Layout
       scores={scores}
