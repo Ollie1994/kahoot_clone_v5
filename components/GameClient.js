@@ -44,7 +44,7 @@ const GameClient = ({ code, quiz, players }) => {
       socket.off("timer");
       socket.off("navigate");
     };
-  }, [countdown, code, username]);
+  }, []);
 
   return <Layout title={quiz.title} players={players} countdown={countdown} />;
 };

@@ -30,7 +30,7 @@ const LobbyClient = ({ code }) => {
       socket.off("players_list");
       socket.off("navigate_to_game");
     };
-  }, [code, username]);
+  }, []);
 
   const startGame = () => {
     socket.emit("navigate_to_game", { room: code });
