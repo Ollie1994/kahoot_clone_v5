@@ -7,7 +7,7 @@ import { quizzes } from "../states/states.js";
 export function endOfGame(socket, io, { room }) {
   if (roomPlayers[room]) {
     delete roomPlayers[room];
-    console.log(roomPlayers, " --- removed <", room, "> from list");
+    console.log(roomPlayers, " --- removed user <", room, "> from list");
   }
 
   if (roomTimers[room]) {
