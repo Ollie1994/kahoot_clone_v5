@@ -1,6 +1,4 @@
 import "@/styles/globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Kahoot Clone v5",
@@ -11,11 +9,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <Header></Header>
-        <main>{children}</main>
-        <Footer></Footer>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
