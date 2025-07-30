@@ -25,7 +25,6 @@ const QuestionHost = ({
           ></img>
         </div>
         <div className={styles.fillerContainer}>
-          <h1>Filler</h1>
         </div>
       </div>
       <div className={styles.answersContainer}>
