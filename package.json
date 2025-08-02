@@ -8,6 +8,7 @@
     "dev:socket": "node server/server.js",
     "build": "next build",
     "start": "next start",
+    "start:socket": "NODE_ENV=production node server/server.js",
     "lint": "next lint"
   },
   "dependencies": {
