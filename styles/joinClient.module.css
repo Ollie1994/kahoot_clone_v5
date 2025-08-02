@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 4rem;
+  margin: 4rem;
+}
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+.codeContainer {
+  display: flex;
+  justify-content: center;
+  border-style: solid;
+  padding: 1rem;
+}
+
+.usernameContainer {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border-style: solid;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  
+}

@@ -1,0 +1,23 @@
+.quizFormTitleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.createQuizFormTitle {
+  display: flex;
+  justify-content: center;
+}
+.rowContainer {
+  display: flex;
+  gap: 1rem;
+}
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.titleFormInput {
+  width: 25rem;
+  height: 3rem;
+  font-size: x-large;
+}

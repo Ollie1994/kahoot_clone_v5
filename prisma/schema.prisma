@@ -1,0 +1,51 @@
+// vid ändringar ( 
+// - npx prisma generate
+// - npx prisma db push
+// )
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+enum Role {
+  PLAYER
+  HOST
+}
+
+type User {
+  id            Int      
+  role          Role     @default(PLAYER)
+  username      String   @default("Player")
+  score         Int      @default(0)
+}
+
+type Answer {
+  answer        String
+  isCorrect     Boolean
+}
+
+type Question {
+  id            Int
+  question      String
+  imageUrl      String? 
+  answers       Answer[]
+}
+
+model quizzes {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  title         String   
+  code          String   @unique
+  isLive        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  users         User[]
+  questions     Question[]
+
+
+   @@unique([id, users.username])
+}

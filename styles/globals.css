@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Set up base font styles */
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  background-color: #fff;
+  color: #000;
+  line-height: 1.5;
+}
+
+/* 3. Reset headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+/* 4. Make images scale and not overflow */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 5. Remove list styles */
+ul, ol {
+  list-style: none;
+}
+
+/* 6. Remove link underlines */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 7. Buttons and inputs */
+button, input, select, textarea {
+  font: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* 8. Set default box-sizing on root */
+html {
+  box-sizing: border-box;
+}
+
+
+
+
+/* ------------------------------ RESET ABOVE ------------------------- */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
