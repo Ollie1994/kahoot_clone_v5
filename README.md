@@ -1,6 +1,6 @@
 # Kahoot Clone
 
-This project was built as a learning exercise to explore and acquire new technologies such as **Next.js**, **Socket.IO/websockets**, and deployment with **AWS EC2**.  
+This is a functional but intentionally incomplete project, built primarily as a learning exercise to explore and acquire new technologies such as **Next.js**, **Socket.IO/websockets**, and deployment with **AWS EC2**.  
 I chose to replicate Kahoot because it offered a straightforward yet powerful structure: a simple frontend, real-time multiplayer features, and a practical use case for sockets.
 
 ## Description
@@ -116,6 +116,7 @@ Inspiration, code snippets, etc.
 * https://www.youtube.com/watch?v=b79LOKfXzOk (for learning socket.io)
 * https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc (ReadMe Template)
   
+
 
 
 
