@@ -1,16 +1,33 @@
 # Kahoot Clone
 
-This project was built as a learning exercise to explore and acquire new technologies such as Next.js, Socket.IO/websockets, and deployment with AWS EC2.
+This project was built as a learning exercise to explore and acquire new technologies such as **Next.js**, **Socket.IO/websockets**, and deployment with **AWS EC2**.  
 I chose to replicate Kahoot because it offered a straightforward yet powerful structure: a simple frontend, real-time multiplayer features, and a practical use case for sockets.
 
 ## Description
-Kahoot is a quiz website/application that allows users to quickly create or use existing quizzes. The part I chose to replicate was the classroom mode, where:
-* A host starts a game on a large screen (projector in a classroom).
-* Players join the game using a unique code on their mobile devices or laptops.
-* Questions are displayed in real time, and players submit their answers through their own devices.
-This project replicates that flow using modern web technologies.
 
-What i hoped to accoplish with this project was to learn about next.js for an upcoming intership where i would be using it, at the same time i also wanted to learn about websockets and how they worked in a room enviroment. While i was doing all of this i was also studying to take the Aws Cloud Practiononers certificate so i also want to use an Aws ec2 instance to deploy it on using pm2 to keep it going.
+Kahoot is a quiz website/application that allows users to quickly create or use existing quizzes.  
+The part I chose to replicate was the classroom mode, where:  
+* A **host** starts a game on a large screen (e.g., projector in a classroom).  
+* **Players** join the game using a unique code on their mobile devices or laptops.  
+* **Questions** are displayed in real time, and players submit their answers through their own devices.  
+
+This project replicates that flow using modern web technologies.  
+
+The main goals of this project were:  
+- Learn **Next.js** for an upcoming internship.
+- Learn how **websockets** enable real-time communication between multiple users grouped into rooms (e.g., one quiz session per room).
+- Gain hands-on experience deploying to an **AWS EC2 instance** using **PM2**.  
+- Complement my studies for the **AWS Cloud Practitioner certificate** by practicing cloud deployment.  
+
+## Features
+
+- ✅ Create and host a quiz session as a teacher/host.  
+- ✅ Players can join using a **unique game code**.  
+- ✅ Real-time communication powered by **Socket.IO**.  
+- ✅ Live question display for all connected players.  
+- ✅ Instant answer submissions and feedback.  
+- ✅ Room-based architecture (multiple games can run independently).  
+- ✅ Deployed and managed on **AWS EC2** with **PM2** for uptime.  
 
 ## Built With
 * Next.js
@@ -26,31 +43,36 @@ What i hoped to accoplish with this project was to learn about next.js for an up
 ## Getting Started
 
 ### Dependencies
-Make sure you have the following installed:
-* Node.js
-* Npm
+Make sure you have the following installed:  
+* [Node.js](https://nodejs.org/)  
+* [npm](https://www.npmjs.com/)  
 
 ### Installing
-* git clone <your-repo-url>
-* cd kahoot-clone
-* npm install
+Clone the repository and install dependencies:
+
+```
+git clone <your-repo-url>
+cd kahoot-clone
+npm install
+```
+
+
 * Create a .env with the following:
 ```
-DATABASE_URL=
-MONGODB_URI=
-HOSTNAME=
-PORT=
-NEXT_PUBLIC_BASE_URL=
+DATABASE_URL=your-mongodb-atlas-uri
+HOSTNAME=localhost
+PORT=3000
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ```
+
 
 ### Executing program
 
-* Custom script to run both socket and node server
+Run the development servers (Next.js + Socket.IO):
 ```
 npm run dev:socket
-
 Ctrl + Mouse left to open the website
-_______________________________________________________
+
 Ctrl + C (to shut down the servers)
 ```
 
@@ -85,8 +107,9 @@ SOFTWARE.
 Inspiration, code snippets, etc.
 * Kahoot (for inspiration)
 * https://www.youtube.com/watch?v=b79LOKfXzOk (for learning socket.io)
-* https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc
+* https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc (ReadMe Template)
   
+
 
 
 
