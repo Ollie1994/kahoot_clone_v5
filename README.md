@@ -5,7 +5,16 @@ The reason i picked Kahoot as a template for what to make was because it fit int
 
 ## Description
 
+## Built With
+* Next.js
+* React
+* Socket.io
+* MongoDb Atlas
+* Prisma.io
 
+## Deployed With
+* Aws EC2 Instance
+* Pm2
 
 ## Getting Started
 
@@ -52,4 +61,5 @@ ex.
 Inspiration, code snippets, etc.
 * https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc
 * 
+
 
