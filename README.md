@@ -21,13 +21,20 @@ The main goals of this project were:
 
 ## Features
 
-- ✅ Create and host a quiz session as a teacher/host.  
-- ✅ Players can join using a **unique game code**.  
-- ✅ Real-time communication powered by **Socket.IO**.  
-- ✅ Live question display for all connected players.  
-- ✅ Instant answer submissions and feedback.  
-- ✅ Room-based architecture (multiple games can run independently).  
-- ✅ Deployed and managed on **AWS EC2** with **PM2** for uptime.  
+- Create and host a quiz session as a teacher/host.  
+- Players can join using a **unique game code**.  
+- Real-time communication powered by **Socket.IO**.  
+- Live question display for all connected players.  
+- Instant answer submissions and feedback.  
+- Room-based architecture (multiple games can run independently).  
+- Deployed and managed on **AWS EC2** with **PM2** for uptime.
+
+## Future Improvements
+- Refine the UI/UX to make the interface more intuitive and user-friendly.  
+- Improve mobile responsiveness for a seamless player experience.  
+- Add user authentication with **NextAuth** (register/login).  
+- Enable users to **save and manage their quizzes**.  
+- Implement proper form validation and error handling. 
 
 ## Built With
 * Next.js
@@ -109,6 +116,7 @@ Inspiration, code snippets, etc.
 * https://www.youtube.com/watch?v=b79LOKfXzOk (for learning socket.io)
 * https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc (ReadMe Template)
   
+
 
 
 
