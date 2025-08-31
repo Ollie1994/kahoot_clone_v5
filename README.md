@@ -33,12 +33,12 @@ The main goals of this project were:
 * Next.js
 * React
 * Socket.io
-* MongoDb Atlas
+* MongoDB Atlas
 * Prisma.io
 
 ## Deployed With
-* Aws EC2 Instance
-* Pm2
+* AWS EC2 Instance
+* PM2
 
 ## Getting Started
 
@@ -109,6 +109,7 @@ Inspiration, code snippets, etc.
 * https://www.youtube.com/watch?v=b79LOKfXzOk (for learning socket.io)
 * https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc (ReadMe Template)
   
+
 
 
 
