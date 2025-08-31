@@ -10,6 +10,8 @@ Kahoot is a quiz website/application that allows users to quickly create or use 
 * Questions are displayed in real time, and players submit their answers through their own devices.
 This project replicates that flow using modern web technologies.
 
+What i hoped to accoplish with this project was to learn about next.js for an upcoming intership where i would be using it, at the same time i also wanted to learn about websockets and how they worked in a room enviroment. While i was doing all of this i was also studying to take the Aws Cloud Practiononers certificate so i also want to use an Aws ec2 instance to deploy it on using pm2 to keep it going.
+
 ## Built With
 * Next.js
 * React
@@ -46,7 +48,7 @@ NEXT_PUBLIC_BASE_URL=
 * Custom script to run both socket and node server
 ```
 npm run dev:socket
-+
+
 Ctrl + Mouse left to open the website
 _______________________________________________________
 Ctrl + C (to shut down the servers)
@@ -85,6 +87,7 @@ Inspiration, code snippets, etc.
 * https://www.youtube.com/watch?v=b79LOKfXzOk (for learning socket.io)
 * https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc
   
+
 
 
 
